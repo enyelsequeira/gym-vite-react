@@ -26,13 +26,15 @@
 //   },
 // });
 import 'dotenv/config';
+import env from '@/env';
 
 export default {
   out: './drizzle/db/migrations',
   schema: './drizzle/db/schema.ts',
+  dialect: 'sqlite',
   driver: 'turso',
   dbCredentials: {
-    url: process.env.VITE_TURSO_DB_URL,
-    authToken: process.env.VITE_TURSO_DB_AUTH_TOKEN,
+    url: env.DATABASE_URL,
+    authToken: env.DATABASE_AUTH_TOKEN,
   },
 };
