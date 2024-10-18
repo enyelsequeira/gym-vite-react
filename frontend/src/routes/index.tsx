@@ -2,16 +2,34 @@ import Features from '@/modules/home/components/features';
 import Hero from '@/modules/home/components/hero';
 import Pricing from '@/modules/home/components/pricing/pricing.tsx';
 import Testimonials from '@/modules/home/components/testimonials/testimonials.tsx';
-import {Box} from '@mantine/core';
-import {createFileRoute} from '@tanstack/react-router';
+import { Box } from '@mantine/core';
+import { queryOptions, useQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
+import { hc } from 'hono/client';
+import type { AppType } from '../../../server/src/app.ts';
 
-// export const turso = createClient({
-//   url: process.env.DATABASE_URL!,
-//   authToken: process.env.DATABASE_AUTH_TOKEN,
-// });
+export const client = hc<AppType>('http://localhost:9999/');
+export const api = client;
 
+async function getCurrentUser() {
+  const res = await api.users.$get();
+  if (!res.ok) {
+    throw new Error('server error');
+  }
+  const data = await res.json();
+  return data;
+}
+
+export const userQueryOptions = queryOptions({
+  queryKey: ['get-current-user'],
+  queryFn: getCurrentUser,
+  staleTime: Number.POSITIVE_INFINITY,
+});
 const Home = () => {
-
+  const { data } = useQuery({
+    ...userQueryOptions,
+  });
+  console.log({ data });
   return (
     <>
       <Box px={{ lg: 80 }}>
