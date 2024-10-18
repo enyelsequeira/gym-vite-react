@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import { Box, Button, Flex, Grid, Image, Stack, Text } from '@mantine/core';
-import { gsap } from 'gsap';
+import gsap from 'gsap';
 import { useCallback, useRef, useState } from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import classes from './features.module.css';
@@ -147,7 +147,7 @@ const Features = () => {
   };
 
   return (
-    <Box px={{ base: 'sm', lg: 80 }} my={100}>
+    <Box px={{ base: 'sm', lg: 80 }} my={100} component={'section'}>
       <Flex direction={'column'} maw={700} mb={77}>
         <Text c={'#0B4A6F'} fz={'md'} fw={600}>
           Key Features
@@ -164,10 +164,17 @@ const Features = () => {
         <Grid.Col span={{ base: 12, lg: 6 }}>
           <FeatureList setActiveIndex={handleSetActiveIndex} />
         </Grid.Col>
-        <Grid.Col span={{ base: 12, lg: 6 }}>
+        <Grid.Col
+          span={{ base: 12, lg: 6 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Box w="100%" h={400} style={{ position: 'relative', overflow: 'hidden' }}>
             {images.map((src, index) => (
               <Image
+                radius={'sm'}
                 key={`${src}+${index + 1}`}
                 ref={(el) => setImageRef(el, index)}
                 src={src}

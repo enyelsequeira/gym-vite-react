@@ -1,3 +1,4 @@
+import Footer from '@/components/footer/footer.tsx';
 import Header from '@/components/header/header.tsx';
 import { Box, Container } from '@mantine/core';
 import type { QueryClient } from '@tanstack/react-query';
@@ -23,9 +24,10 @@ function RootComponent() {
   return (
     <Box>
       <Header />
-      <Container maw={1440} bd={'1px solid blue'} mih={'100dvh'} py={'md'} px={0}>
+      <Container maw={1440} mih={'100dvh'} py={'md'} px={0}>
         <Outlet />
       </Container>
+      <Footer />
 
       <ReactQueryDevtools buttonPosition="bottom-left" />
       <TanStackRouterDevtools position="bottom-right" />

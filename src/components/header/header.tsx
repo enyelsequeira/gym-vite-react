@@ -17,7 +17,7 @@ const Header = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
 
   return (
-    <Box maw={1700} py={'xs'} px={'sm'} mx={'auto'}>
+    <Box maw={1700} py={'lg'} px={'sm'} mx={'auto'}>
       <Flex component={'header'} align={'center'} justify={'space-between'}>
         <Flex align={'center'} gap={'xs'} w={'fit-content'} px={'md'}>
           <Text fz={'xl'} fw={'bold'} td={'underline'}>
