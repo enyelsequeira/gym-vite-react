@@ -1,28 +1,27 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
-    "moduleDetection": "force",
-    "allowJs": true,
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true,
-    "target": "ESNext",
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./server/src/*"]
+      "@/*": ["./src/*"],
+      "@server/*": ["../server/src/*"]
     },
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["node"],
+
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
     "strict": true,
-    "outDir": "./dist",
-    "skipLibCheck": true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "tsc-alias": {
-    "resolveFullPaths": true
-  }
+  "include": ["./src", "../server/src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
