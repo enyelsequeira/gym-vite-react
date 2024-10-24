@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 dev.db
+.env
+.env.local
+.env.production
