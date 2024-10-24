@@ -15,7 +15,6 @@ import { GiFeatheredWing } from 'react-icons/gi';
 
 const Header = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-
   return (
     <Box maw={1700} py={'lg'} px={'sm'} mx={'auto'}>
       <Flex component={'header'} align={'center'} justify={'space-between'}>
@@ -31,7 +30,9 @@ const Header = () => {
           <Text fw={500}>Pricing</Text>
           <Text fw={500}>About</Text>
           <Group>
-            <Button variant="default">Log in</Button>
+            <Button variant="default" type={'button'}>
+              Log in
+            </Button>
             <Button>Sign up</Button>
           </Group>
         </Flex>
