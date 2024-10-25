@@ -1,3 +1,4 @@
+import Logo from '@/components/logo.tsx';
 import {
   Box,
   Burger,
@@ -11,6 +12,7 @@ import {
   rem,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { Link } from '@tanstack/react-router';
 import { GiFeatheredWing } from 'react-icons/gi';
 
 const Header = () => {
@@ -19,10 +21,7 @@ const Header = () => {
     <Box maw={1700} py={'lg'} px={'sm'} mx={'auto'}>
       <Flex component={'header'} align={'center'} justify={'space-between'}>
         <Flex align={'center'} gap={'xs'} w={'fit-content'} px={'md'}>
-          <Text fz={'xl'} fw={'bold'} td={'underline'}>
-            Active Life
-          </Text>
-          <GiFeatheredWing />
+          <Logo />
         </Flex>
         <Burger hiddenFrom="sm" onClick={toggleDrawer} />
         <Flex visibleFrom="sm" align={'center'} gap={'sm'}>
@@ -31,7 +30,7 @@ const Header = () => {
           <Text fw={500}>About</Text>
           <Group>
             <Button variant="default" type={'button'}>
-              Log in
+              <Link to={'/login'}>Log in</Link>
             </Button>
             <Button>Sign up</Button>
           </Group>
