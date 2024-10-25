@@ -8,6 +8,7 @@ import { ConvexQueryClient } from '@convex-dev/react-query';
 import { useGSAP } from '@gsap/react';
 import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import gsap from 'gsap';
+import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom/client';
 
 gsap.registerPlugin(useGSAP);
@@ -48,11 +49,13 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <ConvexProvider client={convex}>
-      <QueryClientProvider client={queryClient}>
-        <AppProviders>
-          <RouterProvider router={router} />
-        </AppProviders>
-      </QueryClientProvider>
+      <CookiesProvider defaultSetOptions={{ path: '/' }}>
+        <QueryClientProvider client={queryClient}>
+          <AppProviders>
+            <RouterProvider router={router} />
+          </AppProviders>
+        </QueryClientProvider>
+      </CookiesProvider>
     </ConvexProvider>
   );
 }
