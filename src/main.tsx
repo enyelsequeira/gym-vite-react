@@ -1,11 +1,14 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
-import { AppProviders } from '@/provider';
+import '@mantine/notifications/styles.css';
+import { AppProviders } from '@/providers';
+import { AuthenticationProvider, useSession } from '@/providers/auth.tsx';
 import { routeTree } from '@/routeTree.gen.ts';
 import { ConvexQueryClient } from '@convex-dev/react-query';
 import { useGSAP } from '@gsap/react';
+import { Notifications } from '@mantine/notifications';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import gsap from 'gsap';
 import { CookiesProvider } from 'react-cookie';
@@ -38,10 +41,26 @@ const router = createRouter({
   routeTree,
   context: {
     queryClient,
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    authentication: undefined!,
   },
   defaultPreload: 'intent',
   defaultPreloadStaleTime: 0,
 });
+
+function App() {
+  const authentication = useSession();
+
+  return (
+    <RouterProvider
+      router={router}
+      defaultPreload="intent"
+      context={{
+        authentication,
+      }}
+    />
+  );
+}
 
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 const rootElement = document.getElementById('root')!;
@@ -51,11 +70,15 @@ if (!rootElement.innerHTML) {
     <ConvexProvider client={convex}>
       <CookiesProvider defaultSetOptions={{ path: '/' }}>
         <QueryClientProvider client={queryClient}>
-          <AppProviders>
-            <RouterProvider router={router} />
-          </AppProviders>
+          <AuthenticationProvider>
+            <AppProviders>
+              <Notifications limit={5} />
+              <App />
+            </AppProviders>
+          </AuthenticationProvider>
         </QueryClientProvider>
       </CookiesProvider>
     </ConvexProvider>
   );
 }
+//

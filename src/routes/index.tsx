@@ -1,28 +1,22 @@
-import { useUpdate } from '@/modules/auth/use-login.tsx';
+import { useLogout, useUpdate } from '@/modules/auth/use-login.tsx';
+import { useSession } from '@/providers/auth.tsx';
 import { getUserOptions } from '@/server/get-users.ts';
 import { Button } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
-import { Cookies } from 'react-cookie';
-
-// Approach 2: Using Cookies instance (Better for utilities/services)
-const cookiesInstance = new Cookies();
-
-// You can use this in a separate utility file
-export const getCookie = (name: string) => {
-  return cookiesInstance.get(name);
-};
 
 const Home = () => {
+  const { session } = useSession();
   const { data: users } = useQuery({
     ...getUserOptions(),
   });
+  const logout = useLogout();
   const { mutate, isPending } = useUpdate();
   console.log({ users });
 
   // let get the cookie
   console.log({
-    cookieValue: getCookie('session'),
+    session,
   });
 
   return (
@@ -31,12 +25,29 @@ const Home = () => {
         loading={isPending}
         onClick={() => {
           mutate({
-            username: 'demo-fronte',
-            userIdToUpdate: '3',
+            username: 'one',
+            userIdToUpdate: '4',
           });
         }}
       >
         Mutate
+      </Button>{' '}
+      <Button
+        loading={isPending}
+        onClick={() => {
+          logout.mutate(
+            {
+              id: `${session.user?.id}`,
+            },
+            {
+              onSuccess: () => {
+                // window.location.reload();
+              },
+            }
+          );
+        }}
+      >
+        LOGOUT
       </Button>
       {/*<Box px={{ lg: 80 }}>*/}
       {/*  <Hero />*/}

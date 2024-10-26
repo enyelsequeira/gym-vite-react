@@ -1,5 +1,6 @@
 import Footer from '@/components/footer/footer.tsx';
 import Header from '@/components/header/header.tsx';
+import type { AuthenticationContext } from '@/providers/auth.tsx';
 import { Box, Container } from '@mantine/core';
 import type { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -8,6 +9,7 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
+  authentication: AuthenticationContext;
 }>()({
   component: RootComponent,
   notFoundComponent: () => {
