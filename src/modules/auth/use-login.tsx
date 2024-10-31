@@ -4,11 +4,6 @@ import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useRouter } from '@tanstack/react-router';
 
-type Login = {
-  username: string;
-  password: string;
-};
-
 type LoginRequest = {
   username: string;
   password: string;
@@ -101,6 +96,7 @@ type LOGOUT = {
 export const useLogout = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const navigate = useNavigate();
   const { logout } = useSession();
   return useMutation({
     mutationKey: ['update'],
@@ -114,9 +110,14 @@ export const useLogout = () => {
       }
     },
     onSuccess: async () => {
-      console.log('success');
       logout();
-      // await router.invalidate();
+      await sleep(200);
+      await router.invalidate();
+      await navigate({
+        to: '/login',
+        replace: true,
+      });
+
       await queryClient.invalidateQueries({
         queryKey: ['all-user'],
       });
