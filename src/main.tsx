@@ -1,6 +1,8 @@
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css'; //if using mantine date picker features
+import 'mantine-react-table/styles.css'; //import MRT styles
 import { AppProviders } from '@/providers';
 import { AuthenticationProvider, useSession } from '@/providers/auth.tsx';
 import { routeTree } from '@/routeTree.gen.ts';

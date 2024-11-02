@@ -5,17 +5,11 @@ import { AppShell, Burger, Button, Group, ScrollArea, SegmentedControl, Text } f
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconBellRinging,
-  IconFileAnalytics,
-  IconLicense,
   IconLogout,
-  IconMessage2,
-  IconMessages,
   IconReceipt2,
-  IconReceiptRefund,
   IconSettings,
   IconShoppingCart,
   IconSwitchHorizontal,
-  IconUsers,
 } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
 import { type PropsWithChildren, useState } from 'react';
@@ -31,13 +25,13 @@ const tabs = {
     // { link: '', label: 'Other Settings', icon: IconSettings },
   ],
   general: [
-    { link: '', label: 'Orders', icon: IconShoppingCart },
-    { link: '', label: 'Receipts', icon: IconLicense },
-    { link: '', label: 'Reviews', icon: IconMessage2 },
-    { link: '', label: 'Messages', icon: IconMessages },
-    { link: '', label: 'Customers', icon: IconUsers },
-    { link: '', label: 'Refunds', icon: IconReceiptRefund },
-    { link: '', label: 'Files', icon: IconFileAnalytics },
+    { link: '/food', label: 'Foods', icon: IconShoppingCart },
+    // { link: '', label: 'Receipts', icon: IconLicense },
+    // { link: '', label: 'Reviews', icon: IconMessage2 },
+    // { link: '', label: 'Messages', icon: IconMessages },
+    // { link: '', label: 'Customers', icon: IconUsers },
+    // { link: '', label: 'Refunds', icon: IconReceiptRefund },
+    // { link: '', label: 'Files', icon: IconFileAnalytics },
   ],
 };
 const ProfileLayout = ({ children }: PropsWithChildren) => {
