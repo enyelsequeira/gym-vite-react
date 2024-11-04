@@ -66,7 +66,7 @@ export const useCreateNewFood = () => {
     mutationFn: async (data: CreateNewFoodType) => {
       try {
         // Add artificial delay
-        await new Promise((resolve) => setTimeout(resolve, 20000));
+        await new Promise((resolve) => setTimeout(resolve, 8000));
 
         const res = await API.url('/foods')
           .post(data)

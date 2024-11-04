@@ -1,10 +1,23 @@
 import { useLogout } from '@/modules/auth/use-login.tsx';
-import classes from '@/modules/profile/components/profile-navigation.module.css';
+import classes from '@/modules/profile/layout/profile-navigation.module.css';
 import { useSession } from '@/providers/auth.tsx';
-import { AppShell, Burger, Button, Group, ScrollArea, SegmentedControl, Text } from '@mantine/core';
+import {
+  AppShell,
+  Burger,
+  Button,
+  Divider,
+  Group,
+  Paper,
+  ScrollArea,
+  SegmentedControl,
+  Text,
+  ThemeIcon,
+  rem,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconBellRinging,
+  IconChevronRight,
   IconLogout,
   IconReceipt2,
   IconSettings,
@@ -18,22 +31,10 @@ const tabs = {
   account: [
     { link: '/profile', label: 'Settings', icon: IconBellRinging },
     { link: '/diet', label: 'Diet', icon: IconReceipt2 },
-    // { link: '', label: 'Security', icon: IconFingerprint },
-    // { link: '', label: 'SSH Keys', icon: IconKey },
-    // { link: '', label: 'Databases', icon: IconDatabaseImport },
-    // { link: '', label: 'Authentication', icon: Icon2fa },
-    // { link: '', label: 'Other Settings', icon: IconSettings },
   ],
-  general: [
-    { link: '/food', label: 'Foods', icon: IconShoppingCart },
-    // { link: '', label: 'Receipts', icon: IconLicense },
-    // { link: '', label: 'Reviews', icon: IconMessage2 },
-    // { link: '', label: 'Messages', icon: IconMessages },
-    // { link: '', label: 'Customers', icon: IconUsers },
-    // { link: '', label: 'Refunds', icon: IconReceiptRefund },
-    // { link: '', label: 'Files', icon: IconFileAnalytics },
-  ],
+  general: [{ link: '/food', label: 'Foods', icon: IconShoppingCart }],
 };
+
 const ProfileLayout = ({ children }: PropsWithChildren) => {
   const { session } = useSession();
   const { mutate, isPending } = useLogout();
@@ -52,10 +53,18 @@ const ProfileLayout = ({ children }: PropsWithChildren) => {
         setActive(item.label);
       }}
     >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
+      <ThemeIcon variant="light" size="lg" color="blue">
+        <item.icon style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+      </ThemeIcon>
       <span>{item.label}</span>
+      <IconChevronRight
+        className={classes.linkIcon}
+        stroke={1.5}
+        style={{ marginLeft: 'auto', opacity: 0.5, width: rem(16) }}
+      />
     </Link>
   ));
+
   return (
     <AppShell
       header={{ height: { base: 60, md: 70, lg: 80 } }}
@@ -66,46 +75,88 @@ const ProfileLayout = ({ children }: PropsWithChildren) => {
       }}
       padding="md"
     >
-      <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <IconSettings size={30} />
+      <AppShell.Header
+        style={{
+          background: 'var(--mantine-color-body)',
+          borderBottom: '1px solid var(--mantine-color-gray-3)',
+        }}
+      >
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            <ThemeIcon size="lg" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }}>
+              <IconSettings style={{ width: rem(24), height: rem(24) }} stroke={1.5} />
+            </ThemeIcon>
+          </Group>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
+
+      <AppShell.Navbar
+        p="md"
+        style={{
+          background: 'var(--mantine-color-body)',
+          borderRight: '1px solid var(--mantine-color-gray-3)',
+        }}
+      >
         <AppShell.Section>
-          <Text fw={500} size="sm" className={classes.title} c="dimmed" mb="xs">
-            Hello, {session?.user?.username}
-          </Text>
+          <Paper withBorder p="md" radius="md" mb="md">
+            <Group>
+              <ThemeIcon
+                size="xl"
+                radius="xl"
+                variant="gradient"
+                gradient={{ from: 'blue', to: 'cyan' }}
+              >
+                {session?.user?.username?.charAt(0).toUpperCase()}
+              </ThemeIcon>
+              <div>
+                <Text fw={500} size="sm">
+                  Hello, {session?.user?.username}
+                </Text>
+                <Text size="xs" c="dimmed">
+                  {session?.user?.type}
+                </Text>
+              </div>
+            </Group>
+          </Paper>
+
           <SegmentedControl
             value={section}
             onChange={(value: any) => setSection(value)}
-            transitionTimingFunction="ease"
             fullWidth
             data={[
               { label: 'Account', value: 'account' },
               { label: 'System', value: 'general', disabled: session.user?.type !== 'ADMIN' },
             ]}
+            style={{ marginBottom: rem(16) }}
           />
         </AppShell.Section>
-        <AppShell.Section grow my="md" component={ScrollArea}>
-          {links}
+
+        <Divider my="sm" />
+
+        <AppShell.Section grow component={ScrollArea}>
+          <div className={classes.linksContainer}>{links}</div>
         </AppShell.Section>
+
+        <Divider my="sm" />
+
         <AppShell.Section>
           <Button
-            fullWidth={true}
-            my={'xs'}
-            onClick={(event) => event.preventDefault()}
-            leftSection={<IconSwitchHorizontal stroke={1.5} />}
+            variant="light"
+            fullWidth
+            leftSection={
+              <IconSwitchHorizontal style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            }
+            mb="sm"
           >
             Change account
           </Button>
 
           <Button
-            variant={'outline'}
-            color={'red.8'}
-            fullWidth={true}
-            rightSection={<IconLogout />}
+            variant="light"
+            color="red"
+            fullWidth
+            leftSection={<IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
             onClick={() => {
               mutate({
                 id: `${session.user?.id}`,
@@ -117,7 +168,13 @@ const ProfileLayout = ({ children }: PropsWithChildren) => {
           </Button>
         </AppShell.Section>
       </AppShell.Navbar>
-      <AppShell.Main bd={'1px solid red'} w={'100%'} bg={'gray.1'}>
+
+      <AppShell.Main
+        style={{
+          background: 'var(--mantine-color-gray-0)',
+          minHeight: '100vh',
+        }}
+      >
         {children}
       </AppShell.Main>
     </AppShell>

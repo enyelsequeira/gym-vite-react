@@ -116,6 +116,9 @@ importers:
       react-icons:
         specifier: ^5.3.0
         version: 5.3.0(react@18.3.1)
+      react-international-phone:
+        specifier: ^4.3.0
+        version: 4.3.0(react@18.3.1)
       recharts:
         specifier: '2'
         version: 2.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1866,6 +1869,11 @@ packages:
     resolution: {integrity: sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==}
     peerDependencies:
       react: '*'
+
+  react-international-phone@4.3.0:
+    resolution: {integrity: sha512-lIntIkwq2j0m3j4RsRiGJl/buHMLBd+mQ9S9RfiX3KbiUCUtbawoPCV2r8BvyeRMZI0cDtovoukBCuZ+70QzJA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -3703,6 +3711,10 @@ snapshots:
       react: 18.3.1
 
   react-icons@5.3.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  react-international-phone@4.3.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
