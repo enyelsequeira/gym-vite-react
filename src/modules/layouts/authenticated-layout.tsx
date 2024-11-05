@@ -1,5 +1,5 @@
 import { useLogout } from '@/modules/auth/use-login.tsx';
-import classes from '@/modules/profile/layout/profile-navigation.module.css';
+import classes from '@/modules/layouts/profile-navigation.module.css';
 import { useSession } from '@/providers/auth.tsx';
 import {
   AppShell,

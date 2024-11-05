@@ -1,8 +1,8 @@
-// FoodsView.tsx
-import CreateNewFood from '@/modules/foods/components/create-new-food.tsx';
-import { type GetAllFoods, useGetAllFoods } from '@/server/foods.ts';
-import { Button, Container, Drawer } from '@mantine/core';
+import CreateNewFood from '@/modules/foods/components/create-new-food';
+import { type GetAllFoods, useGetAllFoods } from '@/server/foods';
+import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { IconPlus } from '@tabler/icons-react';
 import { type MRT_ColumnDef, MantineReactTable, useMantineReactTable } from 'mantine-react-table';
 import { useMemo } from 'react';
 
@@ -15,34 +15,46 @@ const FoodsView = () => {
       {
         accessorKey: 'id',
         header: 'ID',
+        size: 80,
       },
       {
         accessorKey: 'name',
         header: 'Name',
+        size: 200,
       },
       {
         accessorKey: 'category',
         header: 'Category',
+        size: 150,
       },
       {
         accessorKey: 'servingSize',
         header: 'Serving Size',
+        size: 120,
       },
       {
         accessorKey: 'protein',
         header: 'Protein',
+        size: 100,
+        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}g</Text>,
       },
       {
         accessorKey: 'fat',
         header: 'Fat',
+        size: 100,
+        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}g</Text>,
       },
       {
         accessorKey: 'carbs',
         header: 'Carbs',
+        size: 100,
+        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}g</Text>,
       },
       {
         accessorKey: 'calories',
         header: 'Calories',
+        size: 100,
+        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}kcal</Text>,
       },
     ],
     []
@@ -58,7 +70,8 @@ const FoodsView = () => {
     enableDensityToggle: false,
     enableHiding: false,
     enableFullScreenToggle: false,
-    state: {
+    enableBottomToolbar: false,
+    initialState: {
       density: 'xs',
     },
     mantineTableProps: {
@@ -67,67 +80,85 @@ const FoodsView = () => {
       highlightOnHover: false,
       fz: 'sm',
     },
-    mantineTableHeadProps: {
-      c: 'gray.8',
-      tt: 'uppercase',
-      fw: 600,
+    mantinePaperProps: {
+      p: 8,
     },
-    mantineTableBodyCellProps: ({ row }) => ({
-      c: 'blue.9',
-      fw: 500,
-      tt: 'capitalize',
+    mantineTableHeadCellProps: {
+      align: 'left',
+      style: {
+        backgroundColor: 'blue.0',
+        color: 'blue.7',
+        fontWeight: 500,
+        textTransform: 'uppercase',
+      },
+    },
+
+    mantineTableBodyRowProps: ({ row }) => ({
       style:
         row.original.id < 0
           ? {
               animation: 'shimmer-and-pulse 2s infinite',
               background: `linear-gradient(
                 110deg,
-                transparent 33%,
-                rgba(83, 109, 254, 0.2) 50%,
-                transparent 67%
+                var(--mantine-color-white) 0%,
+                var(--mantine-color-blue-1) 50%,
+                var(--mantine-color-white) 100%
               )`,
               backgroundSize: '200% 100%',
-              position: 'relative',
             }
           : undefined,
     }),
-    renderTopToolbarCustomActions: () => <Button onClick={open}>Create New</Button>,
+    mantineTableBodyCellProps: {
+      color: 'blue.7',
+    },
+    renderTopToolbarCustomActions: () => (
+      <Button
+        variant="gradient"
+        gradient={{ from: 'blue', to: 'cyan' }}
+        radius="md"
+        leftSection={<IconPlus size={20} />}
+        onClick={open}
+      >
+        Create New
+      </Button>
+    ),
   });
 
   return (
-    <Container size={'xl'}>
-      <Drawer.Root opened={opened} onClose={close}>
-        <Drawer.Overlay />
-        <Drawer.Content>
-          <Drawer.Header>
-            <Drawer.Title fw={600} fz={20} tt={'capitalize'}>
-              Create New Food
-            </Drawer.Title>
-            <Drawer.CloseButton />
-          </Drawer.Header>
-          <Drawer.Body>
-            <CreateNewFood onSuccess={close} />
-          </Drawer.Body>
-        </Drawer.Content>
-      </Drawer.Root>
-      <MantineReactTable table={table} />
+    <Container size="xl" py="md">
+      <Stack gap="lg">
+        <Card padding={'md'} radius="md" withBorder>
+          <Card.Section withBorder inheritPadding py="xs" bg="blue.0" mb={'lg'}>
+            <Text fw={500} c="blue.7">
+              Food Database
+            </Text>
+          </Card.Section>
+          <MantineReactTable table={table} />
+        </Card>
+
+        <Drawer
+          opened={opened}
+          onClose={close}
+          title={
+            <Text fw={500} size="lg" c="blue.7">
+              Add New Food
+            </Text>
+          }
+          position="right"
+          size="md"
+        >
+          <CreateNewFood onSuccess={close} />
+        </Drawer>
+      </Stack>
+
       <style>
         {`
           @keyframes shimmer-and-pulse {
             0% {
               background-position: 200% 0;
-              transform: scale(1);
-              box-shadow: 0 0 0 0 rgba(83, 109, 254, 0.2);
-            }
-            50% {
-              background-position: -200% 0;
-              transform: scale(1.02);
-              box-shadow: 0 0 0 10px rgba(83, 109, 254, 0);
             }
             100% {
-              background-position: 200% 0;
-              transform: scale(1);
-              box-shadow: 0 0 0 0 rgba(83, 109, 254, 0);
+              background-position: -200% 0;
             }
           }
         `}

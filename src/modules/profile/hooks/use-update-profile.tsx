@@ -1,7 +1,7 @@
 import { API } from '@/server';
 import type { MeResponse } from '@/server/get-me.ts';
+import { onErrorConfig, onMutateConfig, onSuccessConfig } from '@/utils/notifications-toast.tsx';
 import { notifications } from '@mantine/notifications';
-import { IconCheck } from '@tabler/icons-react';
 import { useMutation } from '@tanstack/react-query';
 
 export const useUpdateProfile = () => {
@@ -11,8 +11,7 @@ export const useUpdateProfile = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        const res = await API.url(`/users/${data?.id}`).patch(data).json();
-        return res;
+        return await API.url(`/users/${data?.id}`).patch(data).json();
       } catch (e) {
         console.log(e);
         throw e;
@@ -24,9 +23,7 @@ export const useUpdateProfile = () => {
         title: `Updating Profile ${variables.id}`,
         message: 'please wait',
         position: 'bottom-center',
-        loading: true,
-        radius: 'lg',
-        color: 'blue',
+        ...onMutateConfig,
       });
     },
     onSuccess: (_, variables) => {
@@ -34,11 +31,7 @@ export const useUpdateProfile = () => {
         id: 'updating',
         title: `Updated Profile ${variables.id}`,
         message: 'Updated Successfully',
-        loading: false,
-        icon: <IconCheck />,
-        radius: 'lg',
-        color: 'green',
-        withBorder: false,
+        ...onSuccessConfig,
       });
     },
     onError: (_, variables) => {
@@ -46,9 +39,7 @@ export const useUpdateProfile = () => {
         id: 'updating',
         title: `Updating ${variables.id} failed`,
         message: 'Something went wrong',
-        loading: false,
-        radius: 'lg',
-        color: 'red',
+        ...onErrorConfig,
       });
     },
   });
