@@ -20,9 +20,11 @@ export type GetAllFoods = {
   updatedAt: string;
 };
 
+export const GET_ALL_FOODS = 'all-foods' as const;
+
 export const getFoodOptions = () => {
   return queryOptions({
-    queryKey: ['all-foods'],
+    queryKey: [GET_ALL_FOODS],
     queryFn: async () => {
       try {
         return await API.get('/foods')

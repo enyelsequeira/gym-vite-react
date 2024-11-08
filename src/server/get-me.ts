@@ -1,4 +1,4 @@
-import { useSession } from '@/providers/auth.tsx';
+import { type AuthenticatedUser, useSession } from '@/providers/auth.tsx';
 import { API } from '@/server/index.ts';
 import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
@@ -23,9 +23,11 @@ export type MeResponse = {
   occupation?: string;
 };
 
-export const getMeOptions = ({ id }: { id: number }) => {
+export const ME_QUERY_KEY = ['get-me'] as const;
+
+export const getMeOptions = ({ id }: Pick<AuthenticatedUser, 'id'>) => {
   return queryOptions({
-    queryKey: ['get-me', { id }],
+    queryKey: [ME_QUERY_KEY, { id }],
     queryFn: async () => {
       try {
         // await new Promise((resolve) => setTimeout(resolve, 8000));

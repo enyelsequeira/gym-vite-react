@@ -15,6 +15,7 @@ import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthenticatedProfileImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedOverviewImport } from './routes/_authenticated/overview'
 import { Route as AuthenticatedFoodImport } from './routes/_authenticated/food'
 import { Route as AuthenticatedDietImport } from './routes/_authenticated/diet'
 import { Route as AuthLoginIndexImport } from './routes/_auth/login/index'
@@ -40,6 +41,12 @@ const IndexRoute = IndexImport.update({
 const AuthenticatedProfileRoute = AuthenticatedProfileImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedOverviewRoute = AuthenticatedOverviewImport.update({
+  id: '/overview',
+  path: '/overview',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
@@ -100,6 +107,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedFoodImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/overview': {
+      id: '/_authenticated/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof AuthenticatedOverviewImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -132,12 +146,14 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 interface AuthenticatedRouteChildren {
   AuthenticatedDietRoute: typeof AuthenticatedDietRoute
   AuthenticatedFoodRoute: typeof AuthenticatedFoodRoute
+  AuthenticatedOverviewRoute: typeof AuthenticatedOverviewRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDietRoute: AuthenticatedDietRoute,
   AuthenticatedFoodRoute: AuthenticatedFoodRoute,
+  AuthenticatedOverviewRoute: AuthenticatedOverviewRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
 }
 
@@ -150,6 +166,7 @@ export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteWithChildren
   '/diet': typeof AuthenticatedDietRoute
   '/food': typeof AuthenticatedFoodRoute
+  '/overview': typeof AuthenticatedOverviewRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/login': typeof AuthLoginIndexRoute
 }
@@ -159,6 +176,7 @@ export interface FileRoutesByTo {
   '': typeof AuthenticatedRouteWithChildren
   '/diet': typeof AuthenticatedDietRoute
   '/food': typeof AuthenticatedFoodRoute
+  '/overview': typeof AuthenticatedOverviewRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/login': typeof AuthLoginIndexRoute
 }
@@ -170,15 +188,16 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_authenticated/diet': typeof AuthenticatedDietRoute
   '/_authenticated/food': typeof AuthenticatedFoodRoute
+  '/_authenticated/overview': typeof AuthenticatedOverviewRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/diet' | '/food' | '/profile' | '/login'
+  fullPaths: '/' | '' | '/diet' | '/food' | '/overview' | '/profile' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/diet' | '/food' | '/profile' | '/login'
+  to: '/' | '' | '/diet' | '/food' | '/overview' | '/profile' | '/login'
   id:
     | '__root__'
     | '/'
@@ -186,6 +205,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/_authenticated/diet'
     | '/_authenticated/food'
+    | '/_authenticated/overview'
     | '/_authenticated/profile'
     | '/_auth/login/'
   fileRoutesById: FileRoutesById
@@ -234,6 +254,7 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated/diet",
         "/_authenticated/food",
+        "/_authenticated/overview",
         "/_authenticated/profile"
       ]
     },
@@ -243,6 +264,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/food": {
       "filePath": "_authenticated/food.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/overview": {
+      "filePath": "_authenticated/overview.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/profile": {

@@ -94,32 +94,38 @@ type LOGOUT = {
   id: string;
 };
 export const useLogout = () => {
-  const queryClient = useQueryClient();
   const router = useRouter();
   const navigate = useNavigate();
   const { logout } = useSession();
+
   return useMutation({
-    mutationKey: ['update'],
+    mutationKey: ['logout'],
     mutationFn: async ({ id }: LOGOUT) => {
       try {
-        const res = await API.url(`/logout/${id}`).post().json();
-        return res;
+        return await API.url(`/logout/${id}`).post().json();
       } catch (e) {
         console.log({ e });
         throw e;
       }
     },
     onSuccess: async () => {
+      // Then clear session
       logout();
-      await sleep(200);
+
+      // Update router and navigate
       await router.invalidate();
       await navigate({
         to: '/login',
-        replace: true,
       });
-
-      await queryClient.invalidateQueries({
-        queryKey: ['all-user'],
+    },
+    onError: async (error) => {
+      console.error('Logout failed:', error);
+      notifications.show({
+        id: 'logout-error',
+        color: 'red',
+        title: 'Logout Failed',
+        message: 'Failed to logout. Please try again.',
+        autoClose: 5000,
       });
     },
   });

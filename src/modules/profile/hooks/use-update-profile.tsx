@@ -9,7 +9,7 @@ export const useUpdateProfile = () => {
     mutationKey: ['update-profile'],
     mutationFn: async (data: Partial<MeResponse>) => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // await new Promise((resolve) => setTimeout(resolve, 2000));
 
         return await API.url(`/users/${data?.id}`).patch(data).json();
       } catch (e) {
