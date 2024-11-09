@@ -24,6 +24,7 @@ import {
   IconSettings,
   IconShoppingCart,
   IconSwitchHorizontal,
+  IconUsers,
 } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
 import { type PropsWithChildren, useState } from 'react';
@@ -34,7 +35,10 @@ const tabs = {
     { link: '/diet', label: 'Diet', icon: IconReceipt2 },
     { link: '/overview', label: 'Overview', icon: IconChartBar },
   ],
-  general: [{ link: '/food', label: 'Foods', icon: IconShoppingCart }],
+  general: [
+    { link: '/food', label: 'Foods', icon: IconShoppingCart },
+    { link: '/users', label: 'Users', icon: IconUsers },
+  ],
 };
 
 const ProfileLayout = ({ children }: PropsWithChildren) => {

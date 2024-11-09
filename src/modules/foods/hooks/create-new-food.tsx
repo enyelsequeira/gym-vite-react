@@ -57,29 +57,15 @@ export const useCreateNewFood = () => {
         old ? [...old, optimisticFood] : [optimisticFood]
       );
 
-      // notifications.show({
-      //   id: 'food-addition',
-      //   title: 'adding new food',
-      //   message: 'please wait',
-      //   position: 'bottom-center',
-      //   ...onMutateConfig,
-      // });
       return { previousFoods };
     },
     onError: (_e, _, context) => {
       if (context?.previousFoods) {
         queryClient.setQueryData(['all-foods'], context.previousFoods);
       }
-      // notifications.update({
-      //   id: 'food-addition',
-      //   title: 'Food creation failed',
-      //   message: 'Food Could not be added',
-      //   ...onErrorConfig,
-      // });
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['all-foods'] });
-      // notifications.hide('food-addition');
     },
   });
 };
