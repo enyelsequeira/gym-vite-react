@@ -1,13 +1,14 @@
 import { GET_ALL_USERS, type GetAllUsers } from '@/modules/users/queries/get-user';
 import { API } from '@/server';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 
 export type CreateUserRequest = Omit<
   GetAllUsers,
   'id' | 'createdAt' | 'updatedAt' | 'dateOfBirth'
 > & {
   password: string;
-  dateOfBirth?: string;
+  dateOfBirth?: string | Date;
 };
 export const useCreateNewUser = () => {
   const queryClient = useQueryClient();
@@ -52,7 +53,9 @@ export const useCreateNewUser = () => {
         city: newUser.city,
         phone: newUser.phone,
         occupation: newUser.occupation,
-        dateOfBirth: newUser.dateOfBirth,
+        dateOfBirth: newUser.dateOfBirth
+          ? dayjs(newUser.dateOfBirth).format('YYYY-MM-DD')
+          : undefined,
         activityLevel: newUser.activityLevel,
       };
 

@@ -19,7 +19,7 @@ const CreateNewButton = createPolymorphicComponent<'button', CustomButtonProps>(
       {...others}
       ref={ref}
     >
-      Cancel
+      {others.children}
     </Button>
   ))
 );
