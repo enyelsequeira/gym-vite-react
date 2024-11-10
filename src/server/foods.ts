@@ -1,5 +1,4 @@
-import { API } from '@/server/index.ts';
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { type PaginationParams, createPaginatedQuery } from '@/utils/create-api-fetcher.ts';
 
 export type GetAllFoods = {
   id: number;
@@ -20,28 +19,14 @@ export type GetAllFoods = {
   updatedAt: string;
 };
 
+type FoodQueryParams = PaginationParams & {
+  name?: string;
+};
+
 export const GET_ALL_FOODS = 'all-foods' as const;
 
-export const getFoodOptions = () => {
-  return queryOptions({
-    queryKey: [GET_ALL_FOODS],
-    queryFn: async () => {
-      try {
-        return await API.get('/foods')
-          .unauthorized(() => {
-            console.log('Unauthorized');
-          })
-          .json<GetAllFoods[]>();
-      } catch (e) {
-        console.log({ e });
-        throw e;
-      }
-    },
-  });
-};
-
-export const useGetAllFoods = () => {
-  return useQuery({
-    ...getFoodOptions(),
-  });
-};
+export const useGetAllFoods = createPaginatedQuery<GetAllFoods, FoodQueryParams>({
+  queryKey: [GET_ALL_FOODS],
+  endpoint: '/foods',
+  debounceFields: ['name'],
+});

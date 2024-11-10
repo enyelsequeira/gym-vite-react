@@ -1,7 +1,6 @@
-import { API } from '@/server/index.ts';
-import { queryOptions, useQuery } from '@tanstack/react-query';
+import { type PaginationParams, createPaginatedQuery } from '@/utils/create-api-fetcher.ts';
 
-export type GetAllUsers = {
+export type User = {
   id: number;
   username: string;
   name: string;
@@ -22,28 +21,14 @@ export type GetAllUsers = {
   activityLevel?: string;
 };
 
-export const GET_ALL_USERS = 'GET_USERS' as const;
-
-export const getAllUserOptions = () => {
-  return queryOptions({
-    queryKey: [GET_ALL_USERS],
-    queryFn: async () => {
-      try {
-        return await API.get('/users')
-          .unauthorized(() => {
-            console.log('Unauthorized');
-          })
-          .json<Array<GetAllUsers>>();
-      } catch (e) {
-        console.log({ e });
-        throw e;
-      }
-    },
-  });
+export type UsersQueryParams = PaginationParams & {
+  username?: string;
 };
 
-export const useGetAllUsers = () => {
-  return useQuery({
-    ...getAllUserOptions(),
-  });
-};
+export const GET_ALL_USERS = 'GET_USERS';
+
+export const useGetAllUsers = createPaginatedQuery<User, UsersQueryParams>({
+  queryKey: [GET_ALL_USERS],
+  endpoint: '/users',
+  debounceFields: ['username'],
+});

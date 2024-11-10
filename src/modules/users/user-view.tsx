@@ -1,138 +1,62 @@
+import useUserColumns from '@/modules/users/columns/user-columns.tsx';
 import CreateNewUserModal from '@/modules/users/components/create-new-user.tsx';
-import { type GetAllUsers, useGetAllUsers } from '@/modules/users/queries/get-user.ts';
+import { useGetAllUsers } from '@/modules/users/queries/get-user.ts';
 import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
-import dayjs from 'dayjs';
-import { type MRT_ColumnDef, MantineReactTable, useMantineReactTable } from 'mantine-react-table';
-import { useMemo } from 'react';
+import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
+import { useState } from 'react';
 
 const UserView = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const { data } = useGetAllUsers();
+  const columns = useUserColumns();
+  const [globalFilter, setGlobalFilter] = useState('');
 
-  const columns = useMemo<MRT_ColumnDef<GetAllUsers>[]>(
-    () => [
-      {
-        accessorKey: 'id',
-        header: 'ID',
-        size: 80,
-      },
-      {
-        accessorKey: 'username',
-        header: 'Username',
-        size: 150,
-      },
-      {
-        accessorKey: 'name',
-        header: 'Name',
-        size: 200,
-      },
-      {
-        accessorKey: 'lastName',
-        header: 'Last Name',
-        size: 200,
-      },
-      {
-        accessorKey: 'type',
-        header: 'Type',
-        size: 150,
-      },
-      {
-        accessorKey: 'createdAt',
-        header: 'Created At',
-        size: 200,
-        accessorFn: ({ createdAt }) => dayjs(createdAt).format('DD/MM/YYYY'),
-      },
-      {
-        accessorKey: 'updatedAt',
-        header: 'Updated At',
-        size: 200,
-        accessorFn: ({ updatedAt }) => dayjs(updatedAt).format('DD/MM/YYYY'),
-      },
-      {
-        accessorKey: 'email',
-        header: 'Email',
-        size: 250,
-      },
-      {
-        accessorKey: 'height',
-        header: 'Height',
-        size: 100,
-        Cell: ({ cell }) =>
-          cell.getValue<number>() ? <Text fz={'sm'}>{cell.getValue<number>()} cm</Text> : null,
-      },
-      {
-        accessorKey: 'weight',
-        header: 'Weight',
-        size: 100,
-        Cell: ({ cell }) =>
-          cell.getValue<number>() ? <Text fz={'sm'}>{cell.getValue<number>()} kg</Text> : null,
-      },
-      {
-        accessorKey: 'targetWeight',
-        header: 'Target Weight',
-        size: 150,
-        Cell: ({ cell }) =>
-          cell.getValue<number>() ? <Text fz={'sm'}>{cell.getValue<number>()} kg</Text> : null,
-      },
-      {
-        accessorKey: 'country',
-        header: 'Country',
-        size: 150,
-      },
-      {
-        accessorKey: 'city',
-        header: 'City',
-        size: 150,
-      },
-      {
-        accessorKey: 'phone',
-        header: 'Phone',
-        size: 150,
-      },
-      {
-        accessorKey: 'occupation',
-        header: 'Occupation',
-        size: 200,
-      },
-      {
-        header: 'Date of Birth',
-        size: 200,
-        accessorFn: ({ dateOfBirth }) =>
-          dateOfBirth
-            ? dayjs(dateOfBirth).isValid()
-              ? dayjs(dateOfBirth).format('DD/MM/YYYY')
-              : 'Invalid Date'
-            : 'N/A',
-      },
-      {
-        accessorKey: 'gender',
-        header: 'Gender',
-        size: 100,
-      },
-      {
-        accessorKey: 'activityLevel',
-        header: 'Activity Level',
-        size: 200,
-      },
-    ],
-    []
-  );
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 5,
+  });
+  const { data, isLoading } = useGetAllUsers({
+    limit: pagination.pageSize,
+    page: pagination.pageIndex + 1,
+    username: globalFilter,
+  });
 
   const table = useMantineReactTable({
     columns,
-    data: data ?? [],
+    data: data?.data ?? [],
     enableColumnActions: false,
     enableColumnFilters: false,
-    enablePagination: false,
+    enablePagination: true,
     enableSorting: false,
     enableDensityToggle: false,
     enableHiding: false,
     enableFullScreenToggle: false,
-    enableBottomToolbar: false,
+    paginationDisplayMode: 'pages',
+    manualPagination: true,
+    enableFilterMatchHighlighting: false,
+
+    rowCount: data?.page?.totalElements ?? 0,
+    manualFiltering: true,
+    onGlobalFilterChange: setGlobalFilter, //hoist internal global state to your state
+
+    state: {
+      globalFilter,
+      pagination,
+      isLoading,
+    },
     initialState: {
       density: 'xs',
+      pagination: {
+        pageIndex: 0,
+        pageSize: 5,
+      },
+    },
+    onPaginationChange: setPagination,
+    mantinePaginationProps: {
+      showRowsPerPage: false,
+      withEdges: true,
+      radius: 'md',
     },
     mantineTableProps: {
       p: 'xs',
@@ -152,7 +76,6 @@ const UserView = () => {
         textTransform: 'uppercase',
       },
     },
-
     mantineTableBodyRowProps: ({ row }) => ({
       style:
         row.original.id < 0
@@ -171,6 +94,7 @@ const UserView = () => {
     mantineTableBodyCellProps: {
       color: 'blue.7',
     },
+
     renderTopToolbarCustomActions: () => (
       <Button
         variant="gradient"

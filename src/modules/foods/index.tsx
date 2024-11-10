@@ -1,127 +1,52 @@
+import { useBaseTable } from '@/components/tables/use-base-table.tsx';
+import useFoodColumns from '@/modules/foods/columns/food.tsx';
 import CreateNewFood from '@/modules/foods/components/create-new-food';
-import { type GetAllFoods, useGetAllFoods } from '@/server/foods';
+import { useGetAllFoods } from '@/server/foods';
 import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
-import { type MRT_ColumnDef, MantineReactTable, useMantineReactTable } from 'mantine-react-table';
-import { useMemo } from 'react';
+import { MantineReactTable } from 'mantine-react-table';
+import { useState } from 'react';
 
 const FoodsView = () => {
+  const columns = useFoodColumns();
   const [opened, { open, close }] = useDisclosure(false);
-  const { data } = useGetAllFoods();
+  const [globalFilter, setGlobalFilter] = useState('');
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
-  const columns = useMemo<MRT_ColumnDef<GetAllFoods>[]>(
-    () => [
-      {
-        accessorKey: 'id',
-        header: 'ID',
-        size: 80,
-      },
-      {
-        accessorKey: 'name',
-        header: 'Name',
-        size: 200,
-      },
-      {
-        accessorKey: 'category',
-        header: 'Category',
-        size: 150,
-      },
-      {
-        accessorKey: 'servingSize',
-        header: 'Serving Size',
-        size: 120,
-      },
-      {
-        accessorKey: 'protein',
-        header: 'Protein',
-        size: 100,
-        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}g</Text>,
-      },
-      {
-        accessorKey: 'fat',
-        header: 'Fat',
-        size: 100,
-        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}g</Text>,
-      },
-      {
-        accessorKey: 'carbs',
-        header: 'Carbs',
-        size: 100,
-        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}g</Text>,
-      },
-      {
-        accessorKey: 'calories',
-        header: 'Calories',
-        size: 100,
-        Cell: ({ cell }) => <Text fz={'sm'}>{cell.getValue<number>()}kcal</Text>,
-      },
-    ],
-    []
-  );
+  const { data, isLoading, isFetching } = useGetAllFoods({
+    limit: pagination.pageSize,
+    page: pagination.pageIndex + 1,
+    name: globalFilter,
+  });
 
-  const table = useMantineReactTable({
+  const handleSuccess = () => {
+    close();
+  };
+
+  const table = useBaseTable({
     columns,
-    data: data ?? [],
-    enableColumnActions: false,
-    enableColumnFilters: false,
-    enablePagination: false,
-    enableSorting: false,
-    enableDensityToggle: false,
-    enableHiding: false,
-    enableFullScreenToggle: false,
-    enableBottomToolbar: false,
-    initialState: {
-      density: 'xs',
+    data,
+    isLoading,
+    isFetching,
+    onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: setPagination,
+    tableOptions: {
+      renderTopToolbarCustomActions: () => (
+        <Button
+          variant="gradient"
+          gradient={{ from: 'blue', to: 'cyan' }}
+          radius="md"
+          leftSection={<IconPlus size={20} />}
+          onClick={open}
+        >
+          Create New
+        </Button>
+      ),
     },
-    mantineTableProps: {
-      p: 'xs',
-      striped: false,
-      highlightOnHover: false,
-      fz: 'sm',
-    },
-    mantinePaperProps: {
-      p: 8,
-    },
-    mantineTableHeadCellProps: {
-      align: 'left',
-      style: {
-        backgroundColor: 'blue.0',
-        color: 'blue.7',
-        fontWeight: 500,
-        textTransform: 'uppercase',
-      },
-    },
-
-    mantineTableBodyRowProps: ({ row }) => ({
-      style:
-        row.original.id < 0
-          ? {
-              animation: 'shimmer-and-pulse 2s infinite',
-              background: `linear-gradient(
-                110deg,
-                var(--mantine-color-white) 0%,
-                var(--mantine-color-blue-1) 50%,
-                var(--mantine-color-white) 100%
-              )`,
-              backgroundSize: '200% 100%',
-            }
-          : undefined,
-    }),
-    mantineTableBodyCellProps: {
-      color: 'blue.7',
-    },
-    renderTopToolbarCustomActions: () => (
-      <Button
-        variant="gradient"
-        gradient={{ from: 'blue', to: 'cyan' }}
-        radius="md"
-        leftSection={<IconPlus size={20} />}
-        onClick={open}
-      >
-        Create New
-      </Button>
-    ),
   });
 
   return (
@@ -147,22 +72,9 @@ const FoodsView = () => {
           position="right"
           size="md"
         >
-          <CreateNewFood onSuccess={close} />
+          <CreateNewFood onSuccess={handleSuccess} />
         </Drawer>
       </Stack>
-
-      <style>
-        {`
-          @keyframes shimmer-and-pulse {
-            0% {
-              background-position: 200% 0;
-            }
-            100% {
-              background-position: -200% 0;
-            }
-          }
-        `}
-      </style>
     </Container>
   );
 };

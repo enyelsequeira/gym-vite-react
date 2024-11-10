@@ -74,7 +74,7 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
     <Box>
       <form
         onSubmit={form.onSubmit((data) => {
-          onSuccess?.();
+          onSuccess?.(); // Close drawer immediately
           mutate({
             ...data,
             calories: Number(data.calories),

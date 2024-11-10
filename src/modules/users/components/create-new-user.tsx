@@ -160,6 +160,7 @@ const CreateNewUserModal = ({ onSuccess }: CreateNewUserModalProps) => {
               <Grid.Col span={{ md: 6 }}>
                 <PersonalTextInput
                   label="Height"
+                  type="number"
                   placeholder="Enter height"
                   rightSection={
                     <Text size="sm" c="dimmed">
@@ -172,6 +173,7 @@ const CreateNewUserModal = ({ onSuccess }: CreateNewUserModalProps) => {
               <Grid.Col span={{ md: 6 }}>
                 <PersonalTextInput
                   label="Current Weight"
+                  type="number"
                   placeholder="Enter weight"
                   rightSection={
                     <Text size="sm" c="dimmed">
@@ -184,6 +186,7 @@ const CreateNewUserModal = ({ onSuccess }: CreateNewUserModalProps) => {
               <Grid.Col span={{ md: 6 }}>
                 <PersonalTextInput
                   label="Target Weight"
+                  type="number"
                   placeholder="Enter target"
                   rightSection={
                     <Text size="sm" c="dimmed">
