@@ -1,30 +1,53 @@
-import { useBaseTable } from '@/components/tables/use-base-table.tsx';
-import useFoodColumns from '@/modules/foods/columns/food.tsx';
+import { useBaseTable } from '@/components/tables/use-base-table';
+import useFoodColumns from '@/modules/foods/columns/food';
 import CreateNewFood from '@/modules/foods/components/create-new-food';
 import { useGetAllFoods } from '@/server/foods';
 import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
-import { useState } from 'react';
+import { Route as FoodRoute } from '../../routes/_authenticated/food';
 
 const FoodsView = () => {
   const columns = useFoodColumns();
   const [opened, { open, close }] = useDisclosure(false);
-  const [globalFilter, setGlobalFilter] = useState('');
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
+  // Get search params from the route
+  const search = FoodRoute.useSearch();
+  const navigate = FoodRoute.useNavigate();
+
+  // Use search params in the query
   const { data, isLoading, isFetching } = useGetAllFoods({
-    limit: pagination.pageSize,
-    page: pagination.pageIndex + 1,
-    name: globalFilter,
+    limit: search.limit,
+    page: search.page,
+    name: search.name,
   });
 
   const handleSuccess = () => {
     close();
+  };
+
+  const handleGlobalFilterChange = (value: string) => {
+    navigate({
+      search: {
+        ...search,
+        name: value || undefined,
+        page: 1,
+      },
+    });
+  };
+
+  const handlePaginationChange = ({
+    pageIndex,
+    pageSize,
+  }: { pageIndex: number; pageSize: number }) => {
+    navigate({
+      search: {
+        ...search,
+        page: pageIndex + 1,
+        limit: pageSize,
+      },
+    });
   };
 
   const table = useBaseTable({
@@ -32,8 +55,8 @@ const FoodsView = () => {
     data,
     isLoading,
     isFetching,
-    onGlobalFilterChange: setGlobalFilter,
-    onPaginationChange: setPagination,
+    onGlobalFilterChange: handleGlobalFilterChange,
+    onPaginationChange: handlePaginationChange,
     tableOptions: {
       renderTopToolbarCustomActions: () => (
         <Button
@@ -46,6 +69,13 @@ const FoodsView = () => {
           Create New
         </Button>
       ),
+      state: {
+        pagination: {
+          pageIndex: search.page - 1,
+          pageSize: search.limit,
+        },
+        globalFilter: search.name,
+      },
     },
   });
 

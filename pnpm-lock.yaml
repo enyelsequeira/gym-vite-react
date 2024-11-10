@@ -65,6 +65,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.70.0
         version: 1.75.0(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tanstack/router-zod-adapter':
+        specifier: ^1.81.1
+        version: 1.81.1(@tanstack/react-router@1.75.0(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(zod@3.23.8)
       '@tiptap/extension-link':
         specifier: ^2.8.0
         version: 2.9.0(@tiptap/core@2.9.0(@tiptap/pm@2.9.0))(@tiptap/pm@2.9.0)
@@ -1105,6 +1108,13 @@ packages:
         optional: true
       webpack:
         optional: true
+
+  '@tanstack/router-zod-adapter@1.81.1':
+    resolution: {integrity: sha512-dZ6U0H1Qi8cODuq163pF3xVZkD/s8qhtpie/JpziNGYj0FttMkHjy+be67S/NomeNqjKUhEDIJoeD+x0+SRfvg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@tanstack/react-router': '>=1.43.2'
+      zod: '>=3'
 
   '@tanstack/store@0.5.5':
     resolution: {integrity: sha512-EOSrgdDAJExbvRZEQ/Xhh9iZchXpMN+ga1Bnk8Nmygzs8TfiE6hbzThF+Pr2G19uHL6+DTDTHhJ8VQiOd7l4tA==}
@@ -2885,6 +2895,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - webpack-sources
+
+  '@tanstack/router-zod-adapter@1.81.1(@tanstack/react-router@1.75.0(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(zod@3.23.8)':
+    dependencies:
+      '@tanstack/react-router': 1.75.0(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      zod: 3.23.8
 
   '@tanstack/store@0.5.5': {}
 
