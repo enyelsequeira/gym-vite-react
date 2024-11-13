@@ -18,6 +18,7 @@ import { Route as AuthenticatedProfileImport } from './routes/_authenticated/pro
 import { Route as AuthenticatedOverviewImport } from './routes/_authenticated/overview'
 import { Route as AuthenticatedFoodImport } from './routes/_authenticated/food'
 import { Route as AuthenticatedDietImport } from './routes/_authenticated/diet'
+import { Route as AuthenticatedChangePasswordImport } from './routes/_authenticated/change-password'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthLoginIndexImport } from './routes/_auth/login/index'
 
@@ -63,6 +64,13 @@ const AuthenticatedDietRoute = AuthenticatedDietImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedChangePasswordRoute =
+  AuthenticatedChangePasswordImport.update({
+    id: '/change-password',
+    path: '/change-password',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   id: '/users/',
   path: '/users/',
@@ -99,6 +107,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
+    }
+    '/_authenticated/change-password': {
+      id: '/_authenticated/change-password'
+      path: '/change-password'
+      fullPath: '/change-password'
+      preLoaderRoute: typeof AuthenticatedChangePasswordImport
+      parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/diet': {
       id: '/_authenticated/diet'
@@ -158,6 +173,7 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedChangePasswordRoute: typeof AuthenticatedChangePasswordRoute
   AuthenticatedDietRoute: typeof AuthenticatedDietRoute
   AuthenticatedFoodRoute: typeof AuthenticatedFoodRoute
   AuthenticatedOverviewRoute: typeof AuthenticatedOverviewRoute
@@ -166,6 +182,7 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedChangePasswordRoute: AuthenticatedChangePasswordRoute,
   AuthenticatedDietRoute: AuthenticatedDietRoute,
   AuthenticatedFoodRoute: AuthenticatedFoodRoute,
   AuthenticatedOverviewRoute: AuthenticatedOverviewRoute,
@@ -180,6 +197,7 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthenticatedRouteWithChildren
+  '/change-password': typeof AuthenticatedChangePasswordRoute
   '/diet': typeof AuthenticatedDietRoute
   '/food': typeof AuthenticatedFoodRoute
   '/overview': typeof AuthenticatedOverviewRoute
@@ -191,6 +209,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthenticatedRouteWithChildren
+  '/change-password': typeof AuthenticatedChangePasswordRoute
   '/diet': typeof AuthenticatedDietRoute
   '/food': typeof AuthenticatedFoodRoute
   '/overview': typeof AuthenticatedOverviewRoute
@@ -204,6 +223,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/_authenticated/change-password': typeof AuthenticatedChangePasswordRoute
   '/_authenticated/diet': typeof AuthenticatedDietRoute
   '/_authenticated/food': typeof AuthenticatedFoodRoute
   '/_authenticated/overview': typeof AuthenticatedOverviewRoute
@@ -217,6 +237,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/change-password'
     | '/diet'
     | '/food'
     | '/overview'
@@ -227,6 +248,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/change-password'
     | '/diet'
     | '/food'
     | '/overview'
@@ -238,6 +260,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/_authenticated'
+    | '/_authenticated/change-password'
     | '/_authenticated/diet'
     | '/_authenticated/food'
     | '/_authenticated/overview'
@@ -288,12 +311,17 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
+        "/_authenticated/change-password",
         "/_authenticated/diet",
         "/_authenticated/food",
         "/_authenticated/overview",
         "/_authenticated/profile",
         "/_authenticated/users/"
       ]
+    },
+    "/_authenticated/change-password": {
+      "filePath": "_authenticated/change-password.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/diet": {
       "filePath": "_authenticated/diet.tsx",

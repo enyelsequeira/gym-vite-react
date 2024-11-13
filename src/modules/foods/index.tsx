@@ -37,13 +37,16 @@ const FoodsView = () => {
   };
 
   const handleGlobalFilterChange = async (value: string) => {
-    await navigate({
-      search: {
-        ...search,
-        name: value,
-        page: 1,
-      },
-    });
+    if (value !== search.name) {
+      await navigate({
+        search: {
+          ...search,
+          name: value,
+          // Don't reset page if clearing the filter
+          page: value ? 1 : search.page,
+        },
+      });
+    }
   };
 
   const table = useBaseTable({
@@ -53,7 +56,7 @@ const FoodsView = () => {
     isFetching,
     onGlobalFilterChange: handleGlobalFilterChange,
     paginationOptions: {
-      activePage: route.page ?? 1,
+      activePage: route.page,
       onPageChange: handlePageChange,
       totalPages: data?.page?.totalPages || 0,
     },

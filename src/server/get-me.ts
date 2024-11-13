@@ -21,6 +21,7 @@ export type MeResponse = {
   city?: string;
   phone?: string;
   occupation?: string;
+  firstLogin: boolean;
 };
 
 export const ME_QUERY_KEY = ['get-me'] as const;

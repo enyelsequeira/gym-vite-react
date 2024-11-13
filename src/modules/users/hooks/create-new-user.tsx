@@ -1,7 +1,9 @@
 import { GET_ALL_USERS, type User } from '@/modules/users/queries/get-user';
 import { API } from '@/server';
 import type { PaginatedResponse } from '@/utils/create-api-fetcher.ts';
+import { onErrorConfig } from '@/utils/notifications-toast.tsx';
 import { createOptimisticEntity, updateQueryWithOptimisticData } from '@/utils/optmistic-update.ts';
+import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export type CreateUserRequest = Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'dateOfBirth'> & {
@@ -63,6 +65,11 @@ export const useCreateNewUser = () => {
       return { snapShot };
     },
     onError: (_err, _, context) => {
+      notifications.show({
+        title: 'Error',
+        message: 'New User was not added',
+        ...onErrorConfig,
+      });
       context?.snapShot?.forEach((data, queryKey) => {
         queryClient.setQueryData(queryKey, data);
       });

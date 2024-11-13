@@ -1,7 +1,9 @@
 import { API } from '@/server';
 import { GET_ALL_FOODS, type GetAllFoods } from '@/server/foods';
 import type { PaginatedResponse } from '@/utils/create-api-fetcher';
+import { onErrorConfig } from '@/utils/notifications-toast.tsx';
 import { createOptimisticEntity, updateQueryWithOptimisticData } from '@/utils/optmistic-update.ts';
+import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export type CreateNewFoodType = Pick<
@@ -69,6 +71,12 @@ export const useCreateNewFood = () => {
       return { snapshot };
     },
     onError: (_err, _newFood, context) => {
+      notifications.show({
+        title: 'Error',
+        message: 'New Food was not added',
+        ...onErrorConfig,
+      });
+
       // On error, restore all queries to their previous state
       context?.snapshot?.forEach((data, queryKey) => {
         queryClient.setQueryData(queryKey, data);

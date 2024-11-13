@@ -31,13 +31,16 @@ const UserView = () => {
   };
 
   const handleGlobalFilterChange = async (value: string) => {
-    await navigate({
-      search: {
-        ...search,
-        username: value,
-        page: 1,
-      },
-    });
+    if (value !== search.username) {
+      await navigate({
+        search: {
+          ...search,
+          username: value,
+          // Don't reset page if clearing the filter
+          page: value ? 1 : search.page,
+        },
+      });
+    }
   };
 
   const table = useBaseTable({
