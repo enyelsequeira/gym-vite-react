@@ -9,10 +9,10 @@ import { MantineReactTable } from 'mantine-react-table';
 import { Route as FoodRoute } from '../../routes/_authenticated/food';
 
 const FoodsView = () => {
+  const route = FoodRoute.useSearch();
   const columns = useFoodColumns();
   const [opened, { open, close }] = useDisclosure(false);
 
-  // Get search params from the route
   const search = FoodRoute.useSearch();
   const navigate = FoodRoute.useNavigate();
 
@@ -27,25 +27,21 @@ const FoodsView = () => {
     close();
   };
 
-  const handleGlobalFilterChange = (value: string) => {
-    navigate({
+  const handlePageChange = async (page: number) => {
+    await navigate({
       search: {
         ...search,
-        name: value || undefined,
-        page: 1,
+        page,
       },
     });
   };
 
-  const handlePaginationChange = ({
-    pageIndex,
-    pageSize,
-  }: { pageIndex: number; pageSize: number }) => {
-    navigate({
+  const handleGlobalFilterChange = async (value: string) => {
+    await navigate({
       search: {
         ...search,
-        page: pageIndex + 1,
-        limit: pageSize,
+        name: value,
+        page: 1,
       },
     });
   };
@@ -56,7 +52,11 @@ const FoodsView = () => {
     isLoading,
     isFetching,
     onGlobalFilterChange: handleGlobalFilterChange,
-    onPaginationChange: handlePaginationChange,
+    paginationOptions: {
+      activePage: route.page ?? 1,
+      onPageChange: handlePageChange,
+      totalPages: data?.page?.totalPages || 0,
+    },
     tableOptions: {
       renderTopToolbarCustomActions: () => (
         <Button
@@ -70,10 +70,6 @@ const FoodsView = () => {
         </Button>
       ),
       state: {
-        pagination: {
-          pageIndex: search.page - 1,
-          pageSize: search.limit,
-        },
         globalFilter: search.name,
       },
     },

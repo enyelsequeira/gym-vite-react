@@ -1,39 +1,8 @@
+import FormSection from '@/components/ui/forms/form-section.tsx';
 import { type CreateNewFoodType, useCreateNewFood } from '@/modules/foods/hooks/create-new-food';
-import {
-  Box,
-  Button,
-  Card,
-  type CardProps,
-  Grid,
-  NumberInput,
-  Select,
-  Stack,
-  Text,
-  TextInput,
-} from '@mantine/core';
+import { Box, Button, Grid, NumberInput, Select, Stack, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconDeviceFloppy } from '@tabler/icons-react';
-import type { ReactNode } from 'react';
-
-interface SectionCardProps extends Omit<CardProps, 'children'> {
-  title: string;
-  children: ReactNode;
-}
-
-export const SectionCard = ({ title, children, ...props }: SectionCardProps) => {
-  return (
-    <Card padding={'xs'} radius="md" withBorder {...props}>
-      <Card.Section withBorder inheritPadding py="xs" bg="var(--mantine-color-blue-0)">
-        <Text fw={500} c="var(--mantine-color-blue-7)">
-          {title}
-        </Text>
-      </Card.Section>
-      <Card.Section inheritPadding pt="md" pb="md">
-        {children}
-      </Card.Section>
-    </Card>
-  );
-};
 
 const categories = [
   'Fruits',
@@ -74,7 +43,7 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
     <Box>
       <form
         onSubmit={form.onSubmit((data) => {
-          onSuccess?.(); // Close drawer immediately
+          onSuccess?.();
           mutate({
             ...data,
             calories: Number(data.calories),
@@ -87,7 +56,7 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
       >
         <Stack gap="md">
           {/* Basic Information */}
-          <SectionCard title="Basic Information">
+          <FormSection title="Basic Information">
             <Grid>
               <Grid.Col span={6}>
                 <TextInput
@@ -127,10 +96,10 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
                 />
               </Grid.Col>
             </Grid>
-          </SectionCard>
+          </FormSection>
 
           {/* Serving Information */}
-          <SectionCard title="   Serving Information">
+          <FormSection title="   Serving Information">
             <Grid>
               <Grid.Col span={6}>
                 <NumberInput
@@ -153,10 +122,10 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
                 />
               </Grid.Col>
             </Grid>
-          </SectionCard>
+          </FormSection>
 
           {/* Nutritional Information */}
-          <SectionCard title="  Nutritional Information">
+          <FormSection title="  Nutritional Information">
             <Grid>
               <Grid.Col span={6}>
                 <NumberInput
@@ -219,10 +188,10 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
                 />
               </Grid.Col>
             </Grid>
-          </SectionCard>
+          </FormSection>
 
           {/* Additional Information */}
-          <SectionCard title="  Additional Information">
+          <FormSection title="  Additional Information">
             <TextInput
               {...form.getInputProps('barcode')}
               label="Barcode"
@@ -230,7 +199,7 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
               variant="filled"
               radius="md"
             />
-          </SectionCard>
+          </FormSection>
 
           <Button
             type="submit"

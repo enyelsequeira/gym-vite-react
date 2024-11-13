@@ -1,15 +1,28 @@
-import { GET_ALL_USERS, type GetAllUsers } from '@/modules/users/queries/get-user';
+import { GET_ALL_USERS, type User } from '@/modules/users/queries/get-user';
 import { API } from '@/server';
+import type { PaginatedResponse } from '@/utils/create-api-fetcher.ts';
+import { createOptimisticEntity, updateQueryWithOptimisticData } from '@/utils/optmistic-update.ts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 
-export type CreateUserRequest = Omit<
-  GetAllUsers,
-  'id' | 'createdAt' | 'updatedAt' | 'dateOfBirth'
-> & {
+export type CreateUserRequest = Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'dateOfBirth'> & {
   password: string;
   dateOfBirth?: string | Date;
 };
+type OptimisticUserData = Omit<User, 'id' | 'createdAt' | 'updatedAt'>;
+
+export const createOptimisticUser = (data: CreateUserRequest): User => {
+  const processedData: OptimisticUserData = {
+    ...data,
+    dateOfBirth:
+      data.dateOfBirth instanceof Date ? data.dateOfBirth.toISOString() : data.dateOfBirth,
+  };
+  return createOptimisticEntity<User, OptimisticUserData>({
+    data: processedData,
+    dateFields: ['dateOfBirth'],
+    defaultFields: {},
+  });
+};
+
 export const useCreateNewUser = () => {
   const queryClient = useQueryClient();
 
@@ -26,7 +39,7 @@ export const useCreateNewUser = () => {
           .unauthorized(() => {
             throw new Error('Unauthorized access');
           })
-          .json<GetAllUsers>();
+          .json<User>();
       } catch (error) {
         console.error('User creation error:', error);
         throw error;
@@ -34,51 +47,37 @@ export const useCreateNewUser = () => {
     },
     onMutate: async (newUser: CreateUserRequest) => {
       await queryClient.cancelQueries({ queryKey: [GET_ALL_USERS] });
-      const previousUsers = queryClient.getQueryData<GetAllUsers[]>([GET_ALL_USERS]);
 
-      const optimisticUser: GetAllUsers = {
-        id: -1, // Temporary ID for optimistic entry
-        username: newUser.username,
-        name: newUser.name,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        type: newUser.type,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        gender: newUser.gender ?? null,
-        height: newUser.height,
-        weight: newUser.weight,
-        targetWeight: newUser.targetWeight,
-        country: newUser.country,
-        city: newUser.city,
-        phone: newUser.phone,
-        occupation: newUser.occupation,
-        dateOfBirth: newUser.dateOfBirth
-          ? dayjs(newUser.dateOfBirth).format('YYYY-MM-DD')
-          : undefined,
-        activityLevel: newUser.activityLevel,
-      };
+      const optimisticUser = createOptimisticUser(newUser);
 
-      queryClient.setQueryData<GetAllUsers[]>([GET_ALL_USERS], (old) =>
-        old ? [optimisticUser, ...old] : [optimisticUser]
-      );
+      const currentQueries = queryClient.getQueriesData<PaginatedResponse<User>>({
+        queryKey: [GET_ALL_USERS],
+      });
 
-      return { previousUsers };
+      const snapShot = new Map(currentQueries);
+
+      currentQueries.forEach(([queryKey, oldData]) => {
+        if (!oldData) return;
+        queryClient.setQueryData(queryKey, updateQueryWithOptimisticData(oldData, optimisticUser));
+      });
+      return { snapShot };
     },
-    onError: (error, _, context) => {
-      console.error('Error creating user:', error);
-      if (context?.previousUsers) {
-        queryClient.setQueryData([GET_ALL_USERS], context.previousUsers);
-      }
-    },
-    onSuccess: (data) => {
-      queryClient.setQueryData<GetAllUsers[]>([GET_ALL_USERS], (old) => {
-        if (!old) return [data];
-        return [data, ...old.filter((user) => user.id !== -1)];
+    onError: (_err, _, context) => {
+      context?.snapShot?.forEach((data, queryKey) => {
+        queryClient.setQueryData(queryKey, data);
       });
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_ALL_USERS] });
+    onSuccess: (newUser) => {
+      const currentQueries = queryClient.getQueriesData<PaginatedResponse<User>>({
+        queryKey: [GET_ALL_USERS],
+      });
+      currentQueries.forEach(([queryKey, oldData]) => {
+        if (!oldData) return;
+        queryClient.setQueryData(queryKey, {
+          ...oldData,
+          data: oldData.data.map((item) => (item.id < 0 ? newUser : item)),
+        });
+      });
     },
   });
 };

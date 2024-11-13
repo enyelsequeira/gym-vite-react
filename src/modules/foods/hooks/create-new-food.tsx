@@ -1,6 +1,7 @@
 import { API } from '@/server';
 import { GET_ALL_FOODS, type GetAllFoods } from '@/server/foods';
 import type { PaginatedResponse } from '@/utils/create-api-fetcher';
+import { createOptimisticEntity, updateQueryWithOptimisticData } from '@/utils/optmistic-update.ts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export type CreateNewFoodType = Pick<
@@ -18,32 +19,15 @@ export type CreateNewFoodType = Pick<
   | 'barcode'
 >;
 
-/**
- * Helper function to create an optimistic food entry
- */
-const createOptimisticFood = (data: CreateNewFoodType): GetAllFoods => ({
-  id: -Math.random(), // Negative ID to identify optimistic entries
-  ...data,
-  verified: false,
-  createdBy: 0,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-});
-
-/**
- * Helper function to update query data with optimistic entry
- */
-const updateQueryWithOptimisticData = (
-  oldData: PaginatedResponse<GetAllFoods>,
-  optimisticFood: GetAllFoods
-): PaginatedResponse<GetAllFoods> => ({
-  ...oldData,
-  data: [optimisticFood, ...oldData.data.slice(0, -1)],
-  page: {
-    ...oldData.page,
-    totalElements: oldData.page.totalElements + 1,
-  },
-});
+export const createOptimisticFood = (data: CreateNewFoodType): GetAllFoods => {
+  return createOptimisticEntity<GetAllFoods, CreateNewFoodType>({
+    data,
+    defaultFields: {
+      verified: false,
+      createdBy: 0,
+    },
+  });
+};
 
 /**
  * Hook for creating a new food item with optimistic updates

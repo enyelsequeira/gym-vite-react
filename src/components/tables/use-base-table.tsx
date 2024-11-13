@@ -1,6 +1,7 @@
+import { TablePagination } from '@/components/pagination';
+import { Flex, Loader } from '@mantine/core';
 import {
   type MRT_ColumnDef,
-  type MRT_PaginationState,
   type MRT_TableOptions,
   useMantineReactTable,
 } from 'mantine-react-table';
@@ -30,9 +31,13 @@ interface UseBaseTableProps<TData extends BaseRow> {
   renderTopToolbarCustomActions?: MRT_TableOptions<TData>['renderTopToolbarCustomActions'];
   renderBottomToolbar?: MRT_TableOptions<TData>['renderBottomToolbar'];
   onGlobalFilterChange?: (value: string) => void;
-  onPaginationChange?: (pagination: MRT_PaginationState) => void;
   tableOptions?: Partial<MRT_TableOptions<TData>>;
   enablePagination?: boolean;
+  paginationOptions?: {
+    activePage: number;
+    onPageChange: (page: number) => void;
+    totalPages: number;
+  };
 }
 
 /**
@@ -44,27 +49,15 @@ export const useBaseTable = <TData extends BaseRow>({
   isLoading,
   isFetching,
   onGlobalFilterChange,
-  onPaginationChange,
   enablePagination = true,
   tableOptions = {},
+  paginationOptions,
 }: UseBaseTableProps<TData>) => {
   const [globalFilter, setGlobalFilter] = useState('');
-  const [pagination, setPagination] = useState<MRT_PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
   const handleGlobalFilterChange = (value: string) => {
     setGlobalFilter(value);
     onGlobalFilterChange?.(value);
-  };
-
-  const handlePaginationChange = (
-    updater: MRT_PaginationState | ((prev: MRT_PaginationState) => MRT_PaginationState)
-  ) => {
-    const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
-    setPagination(newPagination);
-    onPaginationChange?.(newPagination);
   };
 
   const currentPageData = data?.data ?? [];
@@ -83,26 +76,21 @@ export const useBaseTable = <TData extends BaseRow>({
     enableFullScreenToggle: false,
     enableBottomToolbar: enablePagination,
     enablePagination,
+    enableFilterMatchHighlighting: false,
 
     // Initial state settings
     initialState: {
       density: 'xs',
+      showGlobalFilter: true,
     },
 
     // Pagination settings when enabled
-    ...(enablePagination && {
-      manualPagination: true,
-      rowCount: totalRows,
-      manualFiltering: true,
-      onGlobalFilterChange: handleGlobalFilterChange,
-      onPaginationChange: handlePaginationChange,
-      paginationDisplayMode: 'pages',
-      mantinePaginationProps: {
-        showRowsPerPage: false,
-        withEdges: true,
-        radius: 'md',
-      },
-    }),
+
+    manualPagination: true,
+    rowCount: totalRows,
+    manualFiltering: true,
+    onGlobalFilterChange: handleGlobalFilterChange,
+    paginationDisplayMode: 'custom',
 
     // Style customization
     mantineTableProps: {
@@ -132,13 +120,36 @@ export const useBaseTable = <TData extends BaseRow>({
 
     // State management
     state: {
-      pagination,
+      ...tableOptions.state,
       globalFilter,
       isLoading,
       showSkeletons: isLoading,
-      showProgressBars: isFetching,
     },
-
+    renderBottomToolbar: () =>
+      paginationOptions ? (
+        <Flex
+          align="center"
+          justify="flex-end"
+          px={'xs'}
+          gap={'md'}
+          py={'md'}
+          pos="relative"
+          style={{
+            borderTop: '1px solid #E4E7EC',
+          }}
+        >
+          <TablePagination
+            total={paginationOptions.totalPages}
+            page={paginationOptions.activePage}
+            onChange={paginationOptions.onPageChange}
+            siblings={1}
+            boundaries={1}
+          />
+          <Flex align={'center'} w={'30px'} h={'30px'}>
+            {isFetching ? <Loader size={'sm'} /> : null}
+          </Flex>
+        </Flex>
+      ) : null,
     // Allow override of any options
     ...tableOptions,
   });

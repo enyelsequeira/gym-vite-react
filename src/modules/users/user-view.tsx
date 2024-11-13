@@ -1,111 +1,72 @@
+import { useBaseTable } from '@/components/tables/use-base-table.tsx';
 import useUserColumns from '@/modules/users/columns/user-columns.tsx';
 import CreateNewUserModal from '@/modules/users/components/create-new-user.tsx';
 import { useGetAllUsers } from '@/modules/users/queries/get-user.ts';
+import { Route as UserRoute } from '@/routes/_authenticated/users/index.tsx';
 import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
-import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
-import { useState } from 'react';
+import { MantineReactTable } from 'mantine-react-table';
 
 const UserView = () => {
+  const search = UserRoute.useSearch();
+  const navigate = UserRoute.useNavigate();
+
   const [opened, { open, close }] = useDisclosure(false);
   const columns = useUserColumns();
-  const [globalFilter, setGlobalFilter] = useState('');
 
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 5,
-  });
-  const { data, isLoading } = useGetAllUsers({
-    limit: pagination.pageSize,
-    page: pagination.pageIndex + 1,
-    username: globalFilter,
+  const { data, isLoading, isFetching } = useGetAllUsers({
+    limit: search.limit,
+    page: search.page,
+    username: search.username,
   });
 
-  const table = useMantineReactTable({
+  const handlePageChange = async (page: number) => {
+    await navigate({
+      search: {
+        ...search,
+        page,
+      },
+    });
+  };
+
+  const handleGlobalFilterChange = async (value: string) => {
+    await navigate({
+      search: {
+        ...search,
+        username: value,
+        page: 1,
+      },
+    });
+  };
+
+  const table = useBaseTable({
     columns,
-    data: data?.data ?? [],
-    enableColumnActions: false,
-    enableColumnFilters: false,
-    enablePagination: true,
-    enableSorting: false,
-    enableDensityToggle: false,
-    enableHiding: false,
-    enableFullScreenToggle: false,
-    paginationDisplayMode: 'pages',
-    manualPagination: true,
-    enableFilterMatchHighlighting: false,
-
-    rowCount: data?.page?.totalElements ?? 0,
-    manualFiltering: true,
-    onGlobalFilterChange: setGlobalFilter, //hoist internal global state to your state
-
-    state: {
-      globalFilter,
-      pagination,
-      isLoading,
+    data,
+    isLoading,
+    isFetching,
+    onGlobalFilterChange: handleGlobalFilterChange,
+    paginationOptions: {
+      activePage: search.page ?? 1,
+      onPageChange: handlePageChange,
+      totalPages: data?.page?.totalPages || 0,
     },
-    initialState: {
-      density: 'xs',
-      pagination: {
-        pageIndex: 0,
-        pageSize: 5,
+    tableOptions: {
+      renderTopToolbarCustomActions: () => (
+        <Button
+          variant="gradient"
+          gradient={{ from: 'blue', to: 'cyan' }}
+          radius="md"
+          leftSection={<IconPlus size={20} />}
+          onClick={open}
+        >
+          Create New
+        </Button>
+      ),
+      state: {
+        globalFilter: search.username,
       },
     },
-    onPaginationChange: setPagination,
-    mantinePaginationProps: {
-      showRowsPerPage: false,
-      withEdges: true,
-      radius: 'md',
-    },
-    mantineTableProps: {
-      p: 'xs',
-      striped: false,
-      highlightOnHover: false,
-      fz: 'sm',
-    },
-    mantinePaperProps: {
-      p: 8,
-    },
-    mantineTableHeadCellProps: {
-      align: 'left',
-      style: {
-        backgroundColor: 'blue.0',
-        color: 'blue.7',
-        fontWeight: 500,
-        textTransform: 'uppercase',
-      },
-    },
-    mantineTableBodyRowProps: ({ row }) => ({
-      style:
-        row.original.id < 0
-          ? {
-              animation: 'shimmer-and-pulse 2s infinite',
-              background: `linear-gradient(
-                110deg,
-                var(--mantine-color-white) 0%,
-                var(--mantine-color-blue-1) 50%,
-                var(--mantine-color-white) 100%
-              )`,
-              backgroundSize: '200% 100%',
-            }
-          : undefined,
-    }),
-    mantineTableBodyCellProps: {
-      color: 'blue.7',
-    },
-
-    renderTopToolbarCustomActions: () => (
-      <Button
-        variant="gradient"
-        gradient={{ from: 'blue', to: 'cyan' }}
-        radius="md"
-        leftSection={<IconPlus size={20} />}
-        onClick={open}
-      >
-        Create New
-      </Button>
-    ),
   });
 
   return (
@@ -134,19 +95,6 @@ const UserView = () => {
           <CreateNewUserModal onSuccess={close} />
         </Drawer>
       </Stack>
-
-      <style>
-        {`
-          @keyframes shimmer-and-pulse {
-            0% {
-              background-position: 200% 0;
-            }
-            100% {
-              background-position: -200% 0;
-            }
-          }
-        `}
-      </style>
     </Container>
   );
 };
