@@ -1,13 +1,40 @@
 import type { User } from '@/modules/users/queries/get-user.ts';
-import { Text } from '@mantine/core';
+import { ActionIcon, Text, Tooltip } from '@mantine/core';
+import { IconExternalLink } from '@tabler/icons-react';
+import { useNavigate } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import type { MRT_ColumnDef } from 'mantine-react-table';
 import { useMemo } from 'react';
 import { defaultCountries, parseCountry } from 'react-international-phone';
 
 const useUserColumns = () => {
+  const navigate = useNavigate();
   return useMemo<MRT_ColumnDef<User>[]>(
     () => [
+      {
+        header: 'Actions',
+        size: 80,
+        Cell: ({ row }) => {
+          return (
+            <Tooltip label={`Go to ${row.original.name}`}>
+              <ActionIcon
+                variant={'transparent'}
+                size={'xs'}
+                onClick={async () => {
+                  await navigate({
+                    to: '/users/$user',
+                    params: {
+                      user: `${row.original.id}`,
+                    },
+                  });
+                }}
+              >
+                <IconExternalLink />
+              </ActionIcon>
+            </Tooltip>
+          );
+        },
+      },
       {
         accessorKey: 'id',
         header: 'ID',
@@ -118,7 +145,7 @@ const useUserColumns = () => {
         size: 200,
       },
     ],
-    []
+    [navigate]
   );
 };
 

@@ -20,6 +20,7 @@ import {
   IconChartBar,
   IconChevronRight,
   IconLogout,
+  IconPassword,
   IconReceipt2,
   IconSettings,
   IconShoppingCart,
@@ -34,6 +35,7 @@ const tabs = {
     { link: '/profile', label: 'Settings', icon: IconBellRinging },
     { link: '/diet', label: 'Diet', icon: IconReceipt2 },
     { link: '/overview', label: 'Overview', icon: IconChartBar },
+    { link: '/change-password', label: 'Change Password', icon: IconPassword },
   ],
   general: [
     { link: '/food', label: 'Foods', icon: IconShoppingCart },
