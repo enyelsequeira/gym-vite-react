@@ -16,6 +16,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
+  IconArrowBarBoth,
   IconBellRinging,
   IconChartBar,
   IconChevronRight,
@@ -36,6 +37,7 @@ const tabs = {
     { link: '/diet', label: 'Diet', icon: IconReceipt2 },
     { link: '/overview', label: 'Overview', icon: IconChartBar },
     { link: '/change-password', label: 'Change Password', icon: IconPassword },
+    { link: '/food-conversion', label: 'Food Conversion', icon: IconArrowBarBoth },
   ],
   general: [
     { link: '/food', label: 'Foods', icon: IconShoppingCart },
