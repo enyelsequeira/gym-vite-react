@@ -1,11 +1,66 @@
-import { useGetAllFoods } from '@/server/foods.ts';
+import { useGetAllFoods } from '@/server/foods';
 import { Button, Container, Group, NumberInput, Paper, Select, Stack, Text } from '@mantine/core';
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-const NutritionChart = ({ sourceNutrition, targetNutrition }) => {
-  const data = [
+interface GetAllFoods {
+  id: number;
+  name: string;
+  brand: string | null;
+  category: string;
+  servingSize: number;
+  servingUnit: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  picture: string | null;
+  barcode: string | null;
+  verified: boolean;
+  createdBy: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Component Types
+interface NutritionData {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
+interface ChartData {
+  name: string;
+  Source: number;
+  Target: number;
+}
+
+interface NutritionChartProps {
+  sourceNutrition: NutritionData;
+  targetNutrition: NutritionData;
+}
+
+interface CalculationResult {
+  amount: number;
+  unit: string;
+  sourceNutrition: NutritionData;
+  targetNutrition: NutritionData;
+}
+
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface GroupedSelectData {
+  group: string;
+  items: SelectOption[];
+}
+
+const NutritionChart: React.FC<NutritionChartProps> = ({ sourceNutrition, targetNutrition }) => {
+  const data: ChartData[] = [
     {
       name: 'Calories',
       Source: Math.round(sourceNutrition.calories),
@@ -53,9 +108,16 @@ function FoodCalculator() {
   const [sourceFood, setSourceFood] = useState<string | null>(null);
   const [targetFood, setTargetFood] = useState<string | null>(null);
   const [amount, setAmount] = useState<number | ''>(100);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<CalculationResult | null>(null);
 
-  const foods = foodData?.data || [];
+  const foods = foodData?.data ?? [];
+
+  const calculateNutrition = (food: GetAllFoods, qty: number): NutritionData => ({
+    calories: food.calories * (qty / food.servingSize),
+    protein: food.protein * (qty / food.servingSize),
+    carbs: food.carbs * (qty / food.servingSize),
+    fat: food.fat * (qty / food.servingSize),
+  });
 
   const calculateExchange = () => {
     if (!sourceFood || !targetFood || !amount) return;
@@ -74,21 +136,8 @@ function FoodCalculator() {
     // Calculate the exchange amount
     const targetAmount = (Number(amount) * caloriesPerUnit.source) / caloriesPerUnit.target;
 
-    // Calculate nutritional values for the source amount
-    const sourceNutrition = {
-      calories: source.calories * (Number(amount) / source.servingSize),
-      protein: source.protein * (Number(amount) / source.servingSize),
-      carbs: source.carbs * (Number(amount) / source.servingSize),
-      fat: source.fat * (Number(amount) / source.servingSize),
-    };
-
-    // Calculate nutritional values for the target amount
-    const targetNutrition = {
-      calories: target.calories * (targetAmount / target.servingSize),
-      protein: target.protein * (targetAmount / target.servingSize),
-      carbs: target.carbs * (targetAmount / target.servingSize),
-      fat: target.fat * (targetAmount / target.servingSize),
-    };
+    const sourceNutrition = calculateNutrition(source, Number(amount));
+    const targetNutrition = calculateNutrition(target, targetAmount);
 
     setResult({
       amount: Math.round(targetAmount * 10) / 10,
@@ -98,29 +147,24 @@ function FoodCalculator() {
     });
   };
 
-  // Group foods by category for the source food select
-  const selectData = Object.entries(
-    foods.reduce(
-      (acc, food) => {
-        const category = food.category || 'Other';
-        if (!acc[category]) {
-          acc[category] = [];
-        }
-        acc[category].push({
-          value: food.id.toString(),
-          label: `${food.name} (${food.servingSize}${food.servingUnit})`,
-        });
-        return acc;
-      },
-      {} as Record<string, { value: string; label: string }[]>
-    )
+  const selectData: GroupedSelectData[] = Object.entries(
+    foods.reduce<Record<string, SelectOption[]>>((acc, food) => {
+      const category = food.category || 'OTHER';
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push({
+        value: food.id.toString(),
+        label: `${food.name} (${food.servingSize}${food.servingUnit})`,
+      });
+      return acc;
+    }, {})
   ).map(([group, items]) => ({
     group,
     items: items.sort((a, b) => a.label.localeCompare(b.label)),
   }));
 
-  // Get filtered foods for target food select
-  const getTargetFoodOptions = () => {
+  const getTargetFoodOptions = (): SelectOption[] => {
     if (!sourceFood) return [];
     const source = foods.find((f) => f.id.toString() === sourceFood);
     if (!source) return [];
@@ -133,6 +177,9 @@ function FoodCalculator() {
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
   };
+
+  const getSelectedFood = (id: string): GetAllFoods | undefined =>
+    foods.find((f) => f.id.toString() === id);
 
   return (
     <Container size="lg">
@@ -147,13 +194,14 @@ function FoodCalculator() {
               onChange={(value) => {
                 setSourceFood(value);
                 setTargetFood(null);
+                setResult(null);
               }}
               searchable
               clearable
             />
 
             <NumberInput
-              label={`Amount ${sourceFood ? `(${foods.find((f) => f.id.toString() === sourceFood)?.servingUnit})` : ''}`}
+              label={`Amount ${sourceFood ? `(${getSelectedFood(sourceFood)?.servingUnit})` : ''}`}
               value={amount}
               onChange={setAmount}
               min={0}
@@ -165,7 +213,10 @@ function FoodCalculator() {
               placeholder="Select target food"
               data={getTargetFoodOptions()}
               value={targetFood}
-              onChange={setTargetFood}
+              onChange={(value) => {
+                setTargetFood(value);
+                setResult(null);
+              }}
               disabled={!sourceFood}
               searchable
               clearable
@@ -182,7 +233,7 @@ function FoodCalculator() {
         </Stack>
       </Paper>
 
-      {result && (
+      {result && sourceFood && targetFood && (
         <Stack gap="md" mt="md">
           <Paper shadow="sm" p="md">
             <Text size="lg" fw={500} mb="md">
@@ -195,35 +246,35 @@ function FoodCalculator() {
           </Paper>
 
           <Group grow>
-            <Paper shadow="sm" p="md">
-              <Text size="lg" fw={500} mb="md">
-                Source: {foods.find((f) => f.id.toString() === sourceFood)?.name}
-              </Text>
-              <Stack gap="xs">
-                <Text>
-                  Amount: {amount} {foods.find((f) => f.id.toString() === sourceFood)?.servingUnit}
+            {[
+              {
+                title: 'Source',
+                food: getSelectedFood(sourceFood),
+                amount,
+                nutrition: result.sourceNutrition,
+              },
+              {
+                title: 'Exchange',
+                food: getSelectedFood(targetFood),
+                amount: result.amount,
+                nutrition: result.targetNutrition,
+              },
+            ].map((item) => (
+              <Paper key={item.title} shadow="sm" p="md">
+                <Text size="lg" fw={500} mb="md">
+                  {item.title}: {item.food?.name}
                 </Text>
-                <Text>Calories: {Math.round(result.sourceNutrition.calories)} kcal</Text>
-                <Text>Protein: {result.sourceNutrition.protein.toFixed(1)}g</Text>
-                <Text>Carbs: {result.sourceNutrition.carbs.toFixed(1)}g</Text>
-                <Text>Fat: {result.sourceNutrition.fat.toFixed(1)}g</Text>
-              </Stack>
-            </Paper>
-
-            <Paper shadow="sm" p="md">
-              <Text size="lg" fw={500} mb="md">
-                Exchange: {foods.find((f) => f.id.toString() === targetFood)?.name}
-              </Text>
-              <Stack gap="xs">
-                <Text>
-                  Amount: {result.amount} {result.unit}
-                </Text>
-                <Text>Calories: {Math.round(result.targetNutrition.calories)} kcal</Text>
-                <Text>Protein: {result.targetNutrition.protein.toFixed(1)}g</Text>
-                <Text>Carbs: {result.targetNutrition.carbs.toFixed(1)}g</Text>
-                <Text>Fat: {result.targetNutrition.fat.toFixed(1)}g</Text>
-              </Stack>
-            </Paper>
+                <Stack gap="xs">
+                  <Text>
+                    Amount: {item.amount} {item.food?.servingUnit}
+                  </Text>
+                  <Text>Calories: {Math.round(item.nutrition.calories)} kcal</Text>
+                  <Text>Protein: {item.nutrition.protein.toFixed(1)}g</Text>
+                  <Text>Carbs: {item.nutrition.carbs.toFixed(1)}g</Text>
+                  <Text>Fat: {item.nutrition.fat.toFixed(1)}g</Text>
+                </Stack>
+              </Paper>
+            ))}
           </Group>
         </Stack>
       )}
