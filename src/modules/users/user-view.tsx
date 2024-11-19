@@ -1,12 +1,12 @@
-import { useBaseTable } from '@/components/tables/use-base-table.tsx';
+import {useBaseTable} from '@/components/tables/use-base-table.tsx';
 import useUserColumns from '@/modules/users/columns/user-columns.tsx';
 import CreateNewUserModal from '@/modules/users/components/create-new-user.tsx';
-import { useGetAllUsers } from '@/modules/users/queries/get-user.ts';
-import { Route as UserRoute } from '@/routes/_authenticated/users/index.tsx';
-import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconPlus } from '@tabler/icons-react';
-import { MantineReactTable } from 'mantine-react-table';
+import {useGetAllUsers} from '@/modules/users/queries/get-user.ts';
+import {Route as UserRoute} from '@/routes/_authenticated/users/index.tsx';
+import {Button, Card, Container, Drawer, Stack, Text} from '@mantine/core';
+import {useDisclosure} from '@mantine/hooks';
+import {IconPlus} from '@tabler/icons-react';
+import {MantineReactTable} from 'mantine-react-table';
 
 const UserView = () => {
   const search = UserRoute.useSearch();
@@ -23,15 +23,15 @@ const UserView = () => {
 
   const handlePageChange = async (page: number) => {
     await navigate({
-      search: {
-        ...search,
+                             search: {
+    ...search,
         page,
       },
     });
   };
 
   const handleGlobalFilterChange = async (value: string) => {
-    if (value !== search.username) {
+                 if (value !== search.username) {
       await navigate({
         search: {
           ...search,

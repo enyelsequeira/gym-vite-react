@@ -1,7 +1,7 @@
-import type { AuthenticatedUser } from '@/providers/auth.tsx';
-import { API } from '@/server';
-import type { MeResponse } from '@/server/get-me.ts';
-import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import type {AuthenticatedUser} from '@/providers/auth.tsx';
+import {API} from '@/server';
+import type {MeResponse} from '@/server/get-me.ts';
+import {queryOptions, useQuery, useSuspenseQuery} from '@tanstack/react-query';
 
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
@@ -28,7 +28,7 @@ export const useGetUserById = ({ id }: Pick<AuthenticatedUser, 'id'>) => {
 };
 
 export const useGetUserByIdSuspenseQuery = ({ id }: Pick<AuthenticatedUser, 'id'>) => {
-  return useSuspenseQuery({
+  return            useSuspenseQuery({
     ...getUserById({ id }),
   });
 };

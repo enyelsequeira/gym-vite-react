@@ -16,8 +16,8 @@ type FormSectionProps = {
 
 export const FormSection = ({ title, children }: FormSectionProps) => (
   <Card shadow="sm" padding="lg" radius="md" withBorder>
-    <Card.Section withBorder inheritPadding py="xs" bg="var(--mantine-color-blue-0)">
-      <Text fw={500} c="var(--mantine-color-blue-7)">
+    <Card.Section withBorder inheritPadding py="xs" bg="blue.0">
+      <Text fw={500} c="blue.7">
         {title}
       </Text>
     </Card.Section>
