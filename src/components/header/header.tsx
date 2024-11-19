@@ -16,9 +16,8 @@ import {
   rem,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconLogout } from '@tabler/icons-react';
+import { IconFeather, IconLogout } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
-import { GiFeatheredWing } from 'react-icons/gi';
 
 const Header = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
@@ -85,7 +84,7 @@ const Header = () => {
             <Text fz={'xl'} fw={'bold'} td={'underline'}>
               Active Life
             </Text>
-            <GiFeatheredWing />
+            <IconFeather />
           </Flex>
         }
         hiddenFrom="sm"

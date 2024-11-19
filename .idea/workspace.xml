@@ -5,33 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/food-conversion/context/form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/biome.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/drag-drop-cms.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/_generated/api.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/_generated/api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/_generated/dataModel.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/_generated/server.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/_generated/server.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/schema.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/tasks.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/food-conversion/components/nutrition-chart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food-conversion/components/nutrition-chart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/food-conversion/components/nutrition-display.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food-conversion/components/nutrition-display.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/food-conversion/helpers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food-conversion/helpers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/food-conversion/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food-conversion/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/profile/components/personal-settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/profile/components/personal-settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/users/user-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/users/user/queries/get-user-by-id.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user/queries/get-user-by-id.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/food-conversion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/food-conversion.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/home/components/features/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/home/components/features/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +110,7 @@
       <workItem from="1731679844755" duration="12756000" />
       <workItem from="1732018405576" duration="553000" />
       <workItem from="1732018989822" duration="126000" />
-      <workItem from="1732019127278" duration="4816000" />
+      <workItem from="1732019127278" duration="5747000" />
     </task>
     <servers />
   </component>
