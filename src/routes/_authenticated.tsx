@@ -1,4 +1,4 @@
-import ProfileLayout from '@/modules/profile/layout';
+import ProfileLayout from '@/modules/layouts/authenticated-layout.tsx';
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router';
 
 const AuthenticatedRoues = () => {
@@ -11,7 +11,6 @@ const AuthenticatedRoues = () => {
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: ({ context }) => {
-    console.log('beforeLoad', context);
     if (!context.authentication.session.user) {
       throw redirect({
         to: '/login',

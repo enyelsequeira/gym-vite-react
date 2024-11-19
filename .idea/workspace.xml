@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/home/components/features/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/home/components/features/index.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2nZMvsTsiQeZqXpl6lY0KZFbkKx" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "food-view",
+    "last_opened_file_path": "/Users/enyelsequeira/Desktop/Personal/drag-drop-cms",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/Users/enyelsequeira/Desktop/personal/drag-drop-cms/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/Users/enyelsequeira/.nvm/versions/node/v22.11.0/bin/node",
+    "nodejs_package_manager_path": "pnpm",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "/Users/enyelsequeira/Desktop/Personal/drag-drop-cms/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/modules/layouts" />
+      <recent name="$PROJECT_DIR$/src/modules/profile/layout" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/server/src" />
+      <recent name="$PROJECT_DIR$/drizzle" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-WS-243.21565.180" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="" />
+      <created>1729176379241</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729176379241</updated>
+      <workItem from="1729176380561" duration="944000" />
+      <workItem from="1729177343598" duration="12855000" />
+      <workItem from="1729239563562" duration="27830000" />
+      <workItem from="1729288438349" duration="1008000" />
+      <workItem from="1729289521102" duration="125000" />
+      <workItem from="1729336719751" duration="2662000" />
+      <workItem from="1729340616934" duration="1288000" />
+      <workItem from="1729500338863" duration="6000" />
+      <workItem from="1729625689738" duration="1758000" />
+      <workItem from="1729759966739" duration="3862000" />
+      <workItem from="1729793620148" duration="2191000" />
+      <workItem from="1729867859743" duration="3697000" />
+      <workItem from="1729873828649" duration="16854000" />
+      <workItem from="1730215094819" duration="3986000" />
+      <workItem from="1730372324793" duration="564000" />
+      <workItem from="1730372897319" duration="6178000" />
+      <workItem from="1730552715663" duration="2196000" />
+      <workItem from="1730579035775" duration="11369000" />
+      <workItem from="1730667706934" duration="14113000" />
+      <workItem from="1730820278796" duration="5967000" />
+      <workItem from="1731082911659" duration="14615000" />
+      <workItem from="1731168315715" duration="20753000" />
+      <workItem from="1731494845769" duration="18954000" />
+      <workItem from="1731604478397" duration="11000" />
+      <workItem from="1731604499291" duration="3059000" />
+      <workItem from="1731679844755" duration="12756000" />
+      <workItem from="1732018405576" duration="553000" />
+      <workItem from="1732018989822" duration="126000" />
+      <workItem from="1732019127278" duration="5747000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/__root.tsx</url>
+          <line>27</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/server/src/app.ts</url>
+          <line>40</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/index.ts</url>
+          <line>10</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/_authenticated/change-password.tsx</url>
+          <line>76</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/users/user/queries/get-user-by-id.ts</url>
+          <line>29</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,6 +1,10 @@
 import { ActionIcon, Flex, Group, Text, rem } from '@mantine/core';
-import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react';
-import { GiFeatheredWing } from 'react-icons/gi';
+import {
+  IconBrandInstagram,
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconFeather,
+} from '@tabler/icons-react';
 
 function FooterSocial() {
   return (
@@ -9,7 +13,7 @@ function FooterSocial() {
         <Text fz={'xl'} fw={'bold'} td={'underline'}>
           Active Life
         </Text>
-        <GiFeatheredWing />
+        <IconFeather />
       </Flex>
       <Group gap={0} justify="flex-end" wrap="nowrap">
         <ActionIcon size="lg" color="gray" variant="subtle">
