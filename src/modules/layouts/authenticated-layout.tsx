@@ -17,6 +17,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconArrowBarBoth,
+  IconBarbell,
   IconBellRinging,
   IconChartBar,
   IconChevronRight,
@@ -42,6 +43,7 @@ const tabs = {
   general: [
     { link: '/food', label: 'Foods', icon: IconShoppingCart },
     { link: '/users', label: 'Users', icon: IconUsers },
+    { link: '/exercises', label: 'exercises', icon: IconBarbell },
   ],
 };
 

@@ -77,11 +77,19 @@ export const createOptimisticEntity = <
 export const updateQueryWithOptimisticData = <T extends BaseEntity>(
   oldData: PaginatedResponse<T>,
   optimisticEntry: T
-): PaginatedResponse<T> => ({
-  ...oldData,
-  data: [optimisticEntry, ...oldData.data.slice(0, -1)],
-  page: {
-    ...oldData.page,
-    totalElements: oldData.page.totalElements + 1,
-  },
-});
+): PaginatedResponse<T> => {
+  // Only remove last item if we've reached page size limit (10)
+  const newData =
+    oldData.data.length >= 10
+      ? [optimisticEntry, ...oldData.data.slice(0, -1)]
+      : [optimisticEntry, ...oldData.data];
+
+  return {
+    ...oldData,
+    data: newData,
+    page: {
+      ...oldData.page,
+      totalElements: oldData.page.totalElements + 1,
+    },
+  };
+};

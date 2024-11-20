@@ -5,12 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/hooks/use-handle-page-change-and-filtering.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/exercises/columns/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/exercises/components/create-new-exercise.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/exercises/exercises.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/exercises/hooks/create-exercise.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/exercises/queries/get-all-exercices.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/_authenticated/exercises.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/home/components/features/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/home/components/features/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/foods/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/foods/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/layouts/authenticated-layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/layouts/authenticated-layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/user-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routeTree.gen.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routeTree.gen.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/optmistic-update.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/optmistic-update.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,25 +44,25 @@
     <option name="showMembers" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "food-view",
-    "last_opened_file_path": "/Users/enyelsequeira/Desktop/Personal/drag-drop-cms",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "/Users/enyelsequeira/Desktop/personal/drag-drop-cms/node_modules/eslint",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/Users/enyelsequeira/.nvm/versions/node/v22.11.0/bin/node",
-    "nodejs_package_manager_path": "pnpm",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "/Users/enyelsequeira/Desktop/Personal/drag-drop-cms/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-workout-section&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/enyelsequeira/Desktop/Personal/drag-drop-cms&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;/Users/enyelsequeira/Desktop/personal/drag-drop-cms/node_modules/eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/Users/enyelsequeira/.nvm/versions/node/v22.11.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/enyelsequeira/Desktop/Personal/drag-drop-cms/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -110,7 +118,8 @@
       <workItem from="1731679844755" duration="12756000" />
       <workItem from="1732018405576" duration="553000" />
       <workItem from="1732018989822" duration="126000" />
-      <workItem from="1732019127278" duration="5747000" />
+      <workItem from="1732019127278" duration="5879000" />
+      <workItem from="1732096939407" duration="9807000" />
     </task>
     <servers />
   </component>

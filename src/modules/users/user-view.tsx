@@ -1,16 +1,17 @@
-import {useBaseTable} from '@/components/tables/use-base-table.tsx';
+import { useBaseTable } from '@/components/tables/use-base-table.tsx';
+import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-filtering.ts';
 import useUserColumns from '@/modules/users/columns/user-columns.tsx';
 import CreateNewUserModal from '@/modules/users/components/create-new-user.tsx';
-import {useGetAllUsers} from '@/modules/users/queries/get-user.ts';
-import {Route as UserRoute} from '@/routes/_authenticated/users/index.tsx';
-import {Button, Card, Container, Drawer, Stack, Text} from '@mantine/core';
-import {useDisclosure} from '@mantine/hooks';
-import {IconPlus} from '@tabler/icons-react';
-import {MantineReactTable} from 'mantine-react-table';
+import { useGetAllUsers } from '@/modules/users/queries/get-user.ts';
+import { Route as UserRoute } from '@/routes/_authenticated/users/index.tsx';
+import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconPlus } from '@tabler/icons-react';
+import { MantineReactTable } from 'mantine-react-table';
 
 const UserView = () => {
+  const { handlePageChange, handleGlobalFilterChange } = useHandlePageChangeAndFiltering();
   const search = UserRoute.useSearch();
-  const navigate = UserRoute.useNavigate();
 
   const [opened, { open, close }] = useDisclosure(false);
   const columns = useUserColumns();
@@ -21,34 +22,16 @@ const UserView = () => {
     username: search.username,
   });
 
-  const handlePageChange = async (page: number) => {
-    await navigate({
-                             search: {
-    ...search,
-        page,
-      },
-    });
-  };
-
-  const handleGlobalFilterChange = async (value: string) => {
-                 if (value !== search.username) {
-      await navigate({
-        search: {
-          ...search,
-          username: value,
-          // Don't reset page if clearing the filter
-          page: value ? 1 : search.page,
-        },
-      });
-    }
-  };
-
   const table = useBaseTable({
     columns,
     data,
     isLoading,
     isFetching,
-    onGlobalFilterChange: handleGlobalFilterChange,
+    onGlobalFilterChange: (e) =>
+      handleGlobalFilterChange({
+        searchParam: 'username',
+        value: e,
+      }),
     paginationOptions: {
       activePage: search.page ?? 1,
       onPageChange: handlePageChange,

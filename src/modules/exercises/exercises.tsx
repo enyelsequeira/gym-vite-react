@@ -1,24 +1,21 @@
-import { useBaseTable } from '@/components/tables/use-base-table';
+import { useBaseTable } from '@/components/tables/use-base-table.tsx';
 import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-filtering.ts';
-import useFoodColumns from '@/modules/foods/columns/food';
-import CreateNewFood from '@/modules/foods/components/create-new-food';
-import { useGetAllFoods } from '@/server/foods';
+import useExerciseColumns from '@/modules/exercises/columns';
+import CreateNewExercise from '@/modules/exercises/components/create-new-exercise.tsx';
+import { useGetAllExercises } from '@/modules/exercises/queries/get-all-exercices.ts';
+import { Route as ExerciseRoute } from '@/routes/_authenticated/exercises';
 import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
-import { Route as FoodRoute } from '../../routes/_authenticated/food';
 
-const FoodsView = () => {
-  const route = FoodRoute.useSearch();
+const ExercisesView = () => {
   const { handlePageChange, handleGlobalFilterChange } = useHandlePageChangeAndFiltering();
-  const columns = useFoodColumns();
-  const [opened, { open, close }] = useDisclosure(false);
+  const route = ExerciseRoute.useSearch();
+  const columns = useExerciseColumns();
 
-  const search = FoodRoute.useSearch();
-
-  // Use search params in the query
-  const { data, isLoading, isFetching } = useGetAllFoods({
+  const search = ExerciseRoute.useSearch();
+  const { data, isLoading, isFetching } = useGetAllExercises({
     limit: search.limit,
     page: search.page,
     name: search.name,
@@ -29,7 +26,11 @@ const FoodsView = () => {
     data,
     isLoading,
     isFetching,
-    onGlobalFilterChange: (e) => handleGlobalFilterChange({ value: e, searchParam: 'name' }),
+    onGlobalFilterChange: (e) =>
+      handleGlobalFilterChange({
+        value: e,
+        searchParam: 'name',
+      }),
     paginationOptions: {
       activePage: route.page,
       onPageChange: handlePageChange,
@@ -53,13 +54,15 @@ const FoodsView = () => {
     },
   });
 
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <Container size="xl" py="md">
       <Stack gap="lg">
         <Card padding={'md'} radius="md" withBorder>
           <Card.Section withBorder inheritPadding py="xs" bg="blue.0" mb={'lg'}>
             <Text fw={500} c="blue.7">
-              Food Database
+              Exercise Database
             </Text>
           </Card.Section>
           <MantineReactTable table={table} />
@@ -70,17 +73,20 @@ const FoodsView = () => {
           onClose={close}
           title={
             <Text fw={500} size="lg" c="blue.7">
-              Add New Food
+              Add New Exercise
             </Text>
           }
           position="right"
           size="md"
         >
-          <CreateNewFood onSuccess={close} />
+          <CreateNewExercise
+            onSuccess={() => {
+              close();
+            }}
+          />
         </Drawer>
       </Stack>
     </Container>
   );
 };
-
-export default FoodsView;
+export default ExercisesView;

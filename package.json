@@ -10,10 +10,7 @@
     "lint": "biome lint src",
     "format": "biome format --write src",
     "check": "biome check --write --organize-imports-enabled=true src",
-    "ci": "biome ci src",
-    "db:push": "drizzle-kit push",
-    "db:generate": "drizzle-kit generate",
-    "studio": "drizzle-kit studio"
+    "ci": "biome ci src"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
