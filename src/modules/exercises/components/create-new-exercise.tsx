@@ -3,7 +3,7 @@ import FormSection from '@/components/ui/forms/form-section.tsx';
 import { PersonalTextInput } from '@/components/ui/forms/text-input-default.tsx';
 import { useCreateNewExercise } from '@/modules/exercises/hooks/create-exercise.tsx';
 import { Box, Grid, Stack } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { isNotEmpty, matches, useForm } from '@mantine/form';
 
 interface CreateNewExerciseProps {
   onSuccess?: () => void;
@@ -18,6 +18,14 @@ const CreateNewExercise = ({ onSuccess }: CreateNewExerciseProps) => {
       notes: '',
       alternative: '',
       video: '',
+    },
+    validate: {
+      name: isNotEmpty('Please Enter a value'),
+      notes: isNotEmpty('Please Enter a value'),
+      video: matches(
+        /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+        'Please Enter a valid url'
+      ),
     },
   });
   return (

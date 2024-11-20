@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ui/table-wrapper/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/countries-transformed.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/extend-search-params.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/exercises/exercises.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/exercises.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/foods/components/create-new-food.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/foods/components/create-new-food.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/foods/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/foods/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/profile/components/personal-settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/profile/components/personal-settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/profile/components/phone-input-matine.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/users/user-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/change-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/change-password.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/exercises.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/exercises.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/food.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/food.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/users/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/exercises/columns/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/columns/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/exercises/components/create-new-exercise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/components/create-new-exercise.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +111,7 @@
       <workItem from="1732018405576" duration="553000" />
       <workItem from="1732018989822" duration="126000" />
       <workItem from="1732019127278" duration="5879000" />
-      <workItem from="1732096939407" duration="11427000" />
+      <workItem from="1732096939407" duration="17987000" />
     </task>
     <servers />
   </component>
