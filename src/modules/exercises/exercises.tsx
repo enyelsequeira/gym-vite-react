@@ -1,10 +1,11 @@
 import { useBaseTable } from '@/components/tables/use-base-table.tsx';
+import { TableDrawer, TableWrapper } from '@/components/ui/table-wrapper';
 import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-filtering.ts';
 import useExerciseColumns from '@/modules/exercises/columns';
 import CreateNewExercise from '@/modules/exercises/components/create-new-exercise.tsx';
 import { useGetAllExercises } from '@/modules/exercises/queries/get-all-exercices.ts';
 import { Route as ExerciseRoute } from '@/routes/_authenticated/exercises';
-import { Button, Card, Container, Drawer, Stack, Text } from '@mantine/core';
+import { Button, Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
@@ -59,32 +60,16 @@ const ExercisesView = () => {
   return (
     <Container size="xl" py="md">
       <Stack gap="lg">
-        <Card padding={'md'} radius="md" withBorder>
-          <Card.Section withBorder inheritPadding py="xs" bg="blue.0" mb={'lg'}>
-            <Text fw={500} c="blue.7">
-              Exercise Database
-            </Text>
-          </Card.Section>
+        <TableWrapper tableTitle={'Exercise Database'}>
           <MantineReactTable table={table} />
-        </Card>
-
-        <Drawer
-          opened={opened}
-          onClose={close}
-          title={
-            <Text fw={500} size="lg" c="blue.7">
-              Add New Exercise
-            </Text>
-          }
-          position="right"
-          size="md"
-        >
+        </TableWrapper>
+        <TableDrawer opened={opened} onClose={close} title={'Add New Exercise'}>
           <CreateNewExercise
             onSuccess={() => {
               close();
             }}
           />
-        </Drawer>
+        </TableDrawer>
       </Stack>
     </Container>
   );

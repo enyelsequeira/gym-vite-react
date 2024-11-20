@@ -1,17 +1,16 @@
 import UserView from '@/modules/users/user-view.tsx';
+import { ExtendBaseSearchParams } from '@/utils/extend-search-params.ts';
 import { createFileRoute } from '@tanstack/react-router';
 import { zodSearchValidator } from '@tanstack/router-zod-adapter';
 import { z } from 'zod';
 
-const searchSchema = z.object({
-  page: z.number().default(1),
-  limit: z.number().default(10),
+const UserSearchParams = ExtendBaseSearchParams({
   username: z.string().optional(),
 });
 
 export const Route = createFileRoute('/_authenticated/users/')({
   component: UsersPage,
-  validateSearch: zodSearchValidator(searchSchema),
+  validateSearch: zodSearchValidator(UserSearchParams),
 });
 
 function UsersPage() {

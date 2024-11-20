@@ -1,5 +1,5 @@
 import CreateNewButton from '@/components/ui/buttons/create-button.tsx';
-import { FormSection } from '@/modules/profile/components/personal-settings.tsx';
+import FormSection from '@/components/ui/forms/form-section.tsx';
 import { useChangePassword } from '@/server/change-password.tsx';
 import { useGetMe } from '@/server/get-me.ts';
 import { Alert, Container, Grid, Group, PasswordInput } from '@mantine/core';

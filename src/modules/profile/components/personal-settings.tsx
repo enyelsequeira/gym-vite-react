@@ -1,45 +1,15 @@
-import PhoneInput from '@/modules/profile/components/phone-input-matine.tsx';
+import CreateButton from '@/components/ui/buttons/create-button.tsx';
+import { DefaultSelect } from '@/components/ui/forms/default-select.tsx';
+import FormSection from '@/components/ui/forms/form-section.tsx';
+import PhoneInput from '@/components/ui/forms/phone-input.tsx';
+import { PersonalTextInput } from '@/components/ui/forms/text-input-default.tsx';
 import { useUpdateProfile } from '@/modules/profile/hooks/use-update-profile.tsx';
 import { useGetMeSuspenseQuery } from '@/server/get-me.ts';
-import { Button, Card, Grid, Group, Select, Stack, Text, TextInput } from '@mantine/core';
+import { transformCountriesData } from '@/utils/countries-transformed.ts';
+import { Grid, Group, Select, Stack, Text } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { IconDeviceFloppy } from '@tabler/icons-react';
 import dayjs from 'dayjs';
-import type { ReactNode } from 'react';
-import { defaultCountries } from 'react-international-phone';
-
-type FormSectionProps = {
-  title: string;
-  children: ReactNode;
-};
-
-export const FormSection = ({ title, children }: FormSectionProps) => (
-  <Card shadow="sm" padding="lg" radius="md" withBorder>
-    <Card.Section withBorder inheritPadding py="xs" bg="blue.0">
-      <Text fw={500} c="blue.7">
-        {title}
-      </Text>
-    </Card.Section>
-    {children}
-  </Card>
-);
-
-const PersonalTextInput = TextInput.withProps({
-  variant: 'filled',
-  radius: 'md',
-});
-
-const transformCountriesData = () => {
-  return defaultCountries.map((country) => {
-    const [countryName, countryCode] = country;
-
-    return {
-      label: countryName,
-      value: countryCode.toUpperCase(), // Convert to uppercase for consistency
-    };
-  });
-};
 
 const PersonalSettings = () => {
   const { mutate, isPending } = useUpdateProfile();
@@ -236,9 +206,7 @@ const PersonalSettings = () => {
               />
             </Grid.Col>
             <Grid.Col span={12}>
-              <Select
-                variant="filled"
-                radius="md"
+              <DefaultSelect
                 label="Activity Level"
                 placeholder="Select activity level"
                 data={[
@@ -256,18 +224,9 @@ const PersonalSettings = () => {
         </FormSection>
 
         <Group justify="flex-end" mt="xl">
-          <Button
-            variant="gradient"
-            type={'submit'}
-            form={'profile-settings'}
-            gradient={{ from: 'blue', to: 'cyan' }}
-            radius="md"
-            px="xl"
-            loading={isPending}
-            leftSection={<IconDeviceFloppy size={20} />}
-          >
+          <CreateButton type={'submit'} form={'profile-settings'} px="xl" loading={isPending}>
             Save Changes
-          </Button>
+          </CreateButton>
         </Group>
       </Stack>
     </form>

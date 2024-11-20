@@ -1,18 +1,12 @@
 import PersonalSettings from '@/modules/profile/components/personal-settings.tsx';
 import { Center, Flex, Group, Loader, Paper, Stack, Text, Title } from '@mantine/core';
 import { IconUserCircle } from '@tabler/icons-react';
-import { type PropsWithChildren, Suspense } from 'react';
-
-const StyledPaper = ({ children }: PropsWithChildren) => (
-  <Paper p="lg" radius="md" withBorder bg="var(--mantine-color-body)">
-    {children}
-  </Paper>
-);
+import { Suspense } from 'react';
 
 const ProfileView = () => {
   return (
     <Flex direction="column" gap="md">
-      <StyledPaper>
+      <Paper p="lg" radius="md" withBorder bg="var(--mantine-color-body)">
         <Group mb="md" align="center">
           <IconUserCircle size={30} color="var(--mantine-color-blue-6)" />
           <Stack gap={4}>
@@ -33,7 +27,7 @@ const ProfileView = () => {
         >
           <PersonalSettings />
         </Suspense>
-      </StyledPaper>
+      </Paper>
     </Flex>
   );
 };

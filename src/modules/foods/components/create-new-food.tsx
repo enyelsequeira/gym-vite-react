@@ -1,8 +1,8 @@
+import CreateButton from '@/components/ui/buttons/create-button.tsx';
 import FormSection from '@/components/ui/forms/form-section.tsx';
 import { type CreateNewFoodType, useCreateNewFood } from '@/modules/foods/hooks/create-new-food';
-import { Box, Button, Grid, NumberInput, Select, Stack, Text, TextInput } from '@mantine/core';
+import { Box, Grid, NumberInput, Select, Stack, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconDeviceFloppy } from '@tabler/icons-react';
 
 const categories = [
   'Fruits',
@@ -201,16 +201,9 @@ const CreateNewFood = ({ onSuccess }: CreateNewFoodProps) => {
             />
           </FormSection>
 
-          <Button
-            type="submit"
-            variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
-            radius="md"
-            loading={isPending}
-            leftSection={<IconDeviceFloppy size={20} />}
-          >
+          <CreateButton type="submit" loading={isPending}>
             Save Food
-          </Button>
+          </CreateButton>
         </Stack>
       </form>
     </Box>
