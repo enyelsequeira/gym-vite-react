@@ -1,4 +1,3 @@
-import { useSession } from '@/providers/auth.tsx';
 import { API } from '@/server/index.ts';
 import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
@@ -32,16 +31,14 @@ export const getUserWeightOptions = ({ id }: { id: number }) => {
   });
 };
 
-export const useGetUserWeight = () => {
-  const { session } = useSession();
+export const useGetUserWeight = ({ userId }: Pick<UserWeights, 'userId'>) => {
   return useQuery({
-    ...getUserWeightOptions({ id: Number(session.user?.id) }),
+    ...getUserWeightOptions({ id: userId }),
   });
 };
 
-export const useGetUserWeightsSuspense = () => {
-  const { session } = useSession();
+export const useGetUserWeightsSuspense = ({ userId }: Pick<UserWeights, 'userId'>) => {
   return useSuspenseQuery({
-    ...getUserWeightOptions({ id: Number(session.user?.id) }),
+    ...getUserWeightOptions({ id: userId }),
   });
 };

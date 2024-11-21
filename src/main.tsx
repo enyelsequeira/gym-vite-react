@@ -11,9 +11,13 @@ import { useGSAP } from '@gsap/react';
 import { Notifications } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import gsap from 'gsap';
 import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom/client';
+
+dayjs.extend(relativeTime);
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(useGSAP);

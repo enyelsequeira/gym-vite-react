@@ -1,4 +1,4 @@
-import { useGetUserById } from '@/modules/users/user/queries/get-user-by-id.ts';
+import { useGetUserWeight } from '@/modules/overview/queries/get-user-weights.ts';
 import UserView from '@/modules/users/user/user-view.tsx';
 import { createFileRoute } from '@tanstack/react-router';
 
@@ -8,9 +8,10 @@ export const Route = createFileRoute('/_authenticated/users/$user/')({
 
 function RouteComponent() {
   const { user } = Route.useParams();
-  const { data } = useGetUserById({
-    id: Number(user),
+  const { data: weights } = useGetUserWeight({
+    userId: Number(user),
   });
-  console.log({ data });
-  return <UserView />;
+
+  console.log({ weights });
+  return <UserView userId={Number(user)} />;
 }

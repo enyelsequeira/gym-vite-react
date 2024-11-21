@@ -133,6 +133,7 @@ const CreateNewUserModal = ({ onSuccess }: CreateNewUserModalProps) => {
                 <DefaultSelect
                   label="Country"
                   data={transformCountriesData()}
+                  searchable
                   placeholder="Enter country"
                   {...form.getInputProps('country')}
                 />
