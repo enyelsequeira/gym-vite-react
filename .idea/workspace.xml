@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/charts/weight-chart.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/video-player/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/users/user/week-workout/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/forms/form-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/forms/form-section.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/overview/queries/get-user-weights.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/overview/queries/get-user-weights.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/overview/user-overview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/overview/user-overview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/users/components/create-new-user.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/components/create-new-user.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/exercises/columns/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/columns/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/exercises/components/create-new-exercise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/components/create-new-exercise.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/exercises/queries/get-all-exercices.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/queries/get-all-exercices.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/users/user/user-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user/user-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/users/$user/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/users/$user/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/dates.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dates.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/create-api-fetcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/create-api-fetcher.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +114,9 @@
       <workItem from="1732018989822" duration="126000" />
       <workItem from="1732019127278" duration="5879000" />
       <workItem from="1732096939407" duration="19462000" />
-      <workItem from="1732202964887" duration="8496000" />
+      <workItem from="1732202964887" duration="9434000" />
+      <workItem from="1732402004082" duration="14000" />
+      <workItem from="1733227610672" duration="10555000" />
     </task>
     <servers />
   </component>

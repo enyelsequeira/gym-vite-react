@@ -8,6 +8,7 @@ export type Exercise = {
   video: string;
   createdAt: string;
   updatedAt: string;
+  muscleGroup: string;
 };
 
 type ExerciseQueryParams = PaginationParams & {
@@ -20,4 +21,33 @@ export const useGetAllExercises = createPaginatedQuery<Exercise, ExerciseQueryPa
   queryKey: [GET_ALL_EXERCISES],
   endpoint: '/exercises',
   debounceFields: ['name'],
+});
+
+export const useGetAllExercisesSelect = createPaginatedQuery<
+  Exercise,
+  ExerciseQueryParams,
+  { group: string; items: { value: string; label: string }[] }[]
+>({
+  queryKey: [GET_ALL_EXERCISES],
+  endpoint: '/exercises',
+  select: (response) => {
+    const groupedExercises = response.data.reduce(
+      (acc, exercise) => {
+        if (!acc[exercise.muscleGroup]) {
+          acc[exercise.muscleGroup] = [];
+        }
+        acc[exercise.muscleGroup].push({
+          value: exercise.id.toString(),
+          label: exercise.name,
+        });
+        return acc;
+      },
+      {} as Record<string, { value: string; label: string }[]>
+    );
+
+    return Object.entries(groupedExercises).map(([muscleGroup, exercises]) => ({
+      group: muscleGroup,
+      items: exercises,
+    }));
+  },
 });

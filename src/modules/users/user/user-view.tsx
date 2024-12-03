@@ -1,5 +1,6 @@
 import WeightChartCard from '@/components/charts/weight-chart.tsx';
 import { useGetUserWeight } from '@/modules/overview/queries/get-user-weights.ts';
+import WeekWorkout from '@/modules/users/user/week-workout';
 import { StandardViewDateFormat } from '@/utils/dates.ts';
 import { Avatar, Badge, Container, Flex, Grid, Group, Paper, Stack, Text } from '@mantine/core';
 import {
@@ -185,6 +186,9 @@ const UserView = ({ userId }: Props) => {
       <Grid my={'md'}>
         <Grid.Col span={{ lg: 6 }}>
           <WeightChartCard weights={weights ?? []} />
+        </Grid.Col>
+        <Grid.Col span={{ lg: 12 }}>
+          <WeekWorkout />
         </Grid.Col>
       </Grid>
     </Container>

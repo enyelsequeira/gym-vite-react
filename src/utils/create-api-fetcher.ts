@@ -1,6 +1,5 @@
 import { API } from '@/server';
-import { constructParamsAllowMultiple } from '@/utils/create-query-params.ts';
-// Base types for pagination
+import { constructParamsAllowMultiple } from '@/utils/create-query-params';
 import { useDebouncedValue } from '@mantine/hooks';
 import { keepPreviousData, queryOptions, useQuery } from '@tanstack/react-query';
 
@@ -19,26 +18,30 @@ export type PaginatedResponse<T> = {
   };
 };
 
-// Generic function to create paginated query options
-export const createPaginatedQueryOptions = <T, P extends PaginationParams>({
+// Add select function type parameter
+export const createPaginatedQueryOptions = <
+  T,
+  P extends PaginationParams,
+  R = PaginatedResponse<T>,
+>({
   queryKey,
   endpoint,
   params,
   debounceFields = [],
+  select,
 }: {
   queryKey: string[];
   endpoint: string;
   params: P;
   debounceFields?: (keyof P)[];
+  select?: (data: PaginatedResponse<T>) => R;
 }) => {
-  // Create debounced values for specified fields
   const debouncedValues = Object.fromEntries(
     Object.entries(params)
       .filter(([key]) => debounceFields.includes(key as keyof P))
       .map(([key, value]) => [key, useDebouncedValue(value, 600)[0]])
   );
 
-  // Combine debounced and non-debounced params
   const finalParams = {
     ...params,
     ...debouncedValues,
@@ -65,26 +68,30 @@ export const createPaginatedQueryOptions = <T, P extends PaginationParams>({
       }
     },
     placeholderData: keepPreviousData,
+    ...(select && { select }),
   });
 };
 
-// Generic hook creator for paginated queries
-export const createPaginatedQuery = <T, P extends PaginationParams>({
+// Update the hook creator to include select function
+export const createPaginatedQuery = <T, P extends PaginationParams, R = PaginatedResponse<T>>({
   queryKey,
   endpoint,
   debounceFields = [],
+  select,
 }: {
   queryKey: string[];
   endpoint: string;
   debounceFields?: (keyof P)[];
+  select?: (data: PaginatedResponse<T>) => R;
 }) => {
   return (params: P = {} as P) => {
     return useQuery({
-      ...createPaginatedQueryOptions<T, P>({
+      ...createPaginatedQueryOptions<T, P, R>({
         queryKey,
         endpoint,
         params,
         debounceFields,
+        select,
       }),
     });
   };
