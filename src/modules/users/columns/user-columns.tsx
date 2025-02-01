@@ -1,6 +1,6 @@
 import type { User } from '@/modules/users/queries/get-user.ts';
-import { ActionIcon, Text, Tooltip } from '@mantine/core';
-import { IconExternalLink } from '@tabler/icons-react';
+import { ActionIcon, Flex, Text, Tooltip } from '@mantine/core';
+import { IconBarbell, IconExternalLink } from '@tabler/icons-react';
 import { useNavigate } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import type { MRT_ColumnDef } from 'mantine-react-table';
@@ -16,22 +16,40 @@ const useUserColumns = () => {
         size: 80,
         Cell: ({ row }) => {
           return (
-            <Tooltip label={`Go to ${row.original.name}`}>
-              <ActionIcon
-                variant={'transparent'}
-                size={'xs'}
-                onClick={async () => {
-                  await navigate({
-                    to: '/users/$user',
-                    params: {
-                      user: `${row.original.id}`,
-                    },
-                  });
-                }}
-              >
-                <IconExternalLink />
-              </ActionIcon>
-            </Tooltip>
+            <Flex gap="xs">
+              <Tooltip label={`Go to ${row.original.name}`}>
+                <ActionIcon
+                  variant={'transparent'}
+                  size={'xs'}
+                  onClick={async () => {
+                    await navigate({
+                      to: '/users/$user',
+                      params: {
+                        user: `${row.original.id}`,
+                      },
+                    });
+                  }}
+                >
+                  <IconExternalLink />
+                </ActionIcon>
+              </Tooltip>
+              <Tooltip label={`Go to ${row.original.name}`}>
+                <ActionIcon
+                  variant={'transparent'}
+                  size={'xs'}
+                  onClick={async () => {
+                    await navigate({
+                      to: '/users/$user/workout',
+                      params: {
+                        user: `${row.original.id}`,
+                      },
+                    });
+                  }}
+                >
+                  <IconBarbell />
+                </ActionIcon>
+              </Tooltip>
+            </Flex>
           );
         },
       },

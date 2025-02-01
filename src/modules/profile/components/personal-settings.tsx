@@ -27,7 +27,7 @@ const PersonalSettings = () => {
       height: data.height ?? undefined,
       weight: data.weight ?? undefined,
       targetWeight: data.targetWeight ?? undefined,
-      dateOfBirth: dayjs(data.dateOfBirth).toDate() ?? new Date(),
+      dateOfBirth: data.dateOfBirth ? dayjs(data.dateOfBirth).toDate() : new Date(),
       gender: data.gender ?? undefined,
       activityLevel: data.activityLevel ?? undefined,
     },

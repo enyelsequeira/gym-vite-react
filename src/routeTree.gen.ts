@@ -14,16 +14,17 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
-import { Route as AuthenticatedProfileImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedOverviewImport } from './routes/_authenticated/overview'
-import { Route as AuthenticatedFoodConversionImport } from './routes/_authenticated/food-conversion'
-import { Route as AuthenticatedFoodImport } from './routes/_authenticated/food'
-import { Route as AuthenticatedExercisesImport } from './routes/_authenticated/exercises'
-import { Route as AuthenticatedDietImport } from './routes/_authenticated/diet'
-import { Route as AuthenticatedChangePasswordImport } from './routes/_authenticated/change-password'
-import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthLoginIndexImport } from './routes/_auth/login/index'
-import { Route as AuthenticatedUsersUserIndexImport } from './routes/_authenticated/users/$user/index'
+import { Route as AuthenticateduserProfileImport } from './routes/_authenticated/(user)/profile'
+import { Route as AuthenticateduserOverviewImport } from './routes/_authenticated/(user)/overview'
+import { Route as AuthenticateduserFoodConversionImport } from './routes/_authenticated/(user)/food-conversion'
+import { Route as AuthenticateduserDietImport } from './routes/_authenticated/(user)/diet'
+import { Route as AuthenticateduserChangePasswordImport } from './routes/_authenticated/(user)/change-password'
+import { Route as AuthenticatedsystemFoodImport } from './routes/_authenticated/(system)/food'
+import { Route as AuthenticatedsystemExercisesImport } from './routes/_authenticated/(system)/exercises'
+import { Route as AuthenticatedsystemUsersIndexImport } from './routes/_authenticated/(system)/users/index'
+import { Route as AuthenticatedsystemUsersUserIndexImport } from './routes/_authenticated/(system)/users/$user/index'
+import { Route as AuthenticatedsystemUsersUserWorkoutImport } from './routes/_authenticated/(system)/users/$user/workout'
 
 // Create/Update Routes
 
@@ -43,66 +44,75 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedProfileRoute = AuthenticatedProfileImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const AuthenticatedOverviewRoute = AuthenticatedOverviewImport.update({
-  id: '/overview',
-  path: '/overview',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const AuthenticatedFoodConversionRoute =
-  AuthenticatedFoodConversionImport.update({
-    id: '/food-conversion',
-    path: '/food-conversion',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-
-const AuthenticatedFoodRoute = AuthenticatedFoodImport.update({
-  id: '/food',
-  path: '/food',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const AuthenticatedExercisesRoute = AuthenticatedExercisesImport.update({
-  id: '/exercises',
-  path: '/exercises',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const AuthenticatedDietRoute = AuthenticatedDietImport.update({
-  id: '/diet',
-  path: '/diet',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const AuthenticatedChangePasswordRoute =
-  AuthenticatedChangePasswordImport.update({
-    id: '/change-password',
-    path: '/change-password',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
 const AuthLoginIndexRoute = AuthLoginIndexImport.update({
   id: '/login/',
   path: '/login/',
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AuthenticatedUsersUserIndexRoute =
-  AuthenticatedUsersUserIndexImport.update({
-    id: '/users/$user/',
+const AuthenticateduserProfileRoute = AuthenticateduserProfileImport.update({
+  id: '/(user)/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticateduserOverviewRoute = AuthenticateduserOverviewImport.update({
+  id: '/(user)/overview',
+  path: '/overview',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticateduserFoodConversionRoute =
+  AuthenticateduserFoodConversionImport.update({
+    id: '/(user)/food-conversion',
+    path: '/food-conversion',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticateduserDietRoute = AuthenticateduserDietImport.update({
+  id: '/(user)/diet',
+  path: '/diet',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticateduserChangePasswordRoute =
+  AuthenticateduserChangePasswordImport.update({
+    id: '/(user)/change-password',
+    path: '/change-password',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedsystemFoodRoute = AuthenticatedsystemFoodImport.update({
+  id: '/(system)/food',
+  path: '/food',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedsystemExercisesRoute =
+  AuthenticatedsystemExercisesImport.update({
+    id: '/(system)/exercises',
+    path: '/exercises',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedsystemUsersIndexRoute =
+  AuthenticatedsystemUsersIndexImport.update({
+    id: '/(system)/users/',
+    path: '/users/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedsystemUsersUserIndexRoute =
+  AuthenticatedsystemUsersUserIndexImport.update({
+    id: '/(system)/users/$user/',
     path: '/users/$user/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedsystemUsersUserWorkoutRoute =
+  AuthenticatedsystemUsersUserWorkoutImport.update({
+    id: '/(system)/users/$user/workout',
+    path: '/users/$user/workout',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
@@ -131,53 +141,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
-    '/_authenticated/change-password': {
-      id: '/_authenticated/change-password'
-      path: '/change-password'
-      fullPath: '/change-password'
-      preLoaderRoute: typeof AuthenticatedChangePasswordImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/diet': {
-      id: '/_authenticated/diet'
-      path: '/diet'
-      fullPath: '/diet'
-      preLoaderRoute: typeof AuthenticatedDietImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/exercises': {
-      id: '/_authenticated/exercises'
+    '/_authenticated/(system)/exercises': {
+      id: '/_authenticated/(system)/exercises'
       path: '/exercises'
       fullPath: '/exercises'
-      preLoaderRoute: typeof AuthenticatedExercisesImport
+      preLoaderRoute: typeof AuthenticatedsystemExercisesImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/food': {
-      id: '/_authenticated/food'
+    '/_authenticated/(system)/food': {
+      id: '/_authenticated/(system)/food'
       path: '/food'
       fullPath: '/food'
-      preLoaderRoute: typeof AuthenticatedFoodImport
+      preLoaderRoute: typeof AuthenticatedsystemFoodImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/food-conversion': {
-      id: '/_authenticated/food-conversion'
+    '/_authenticated/(user)/change-password': {
+      id: '/_authenticated/(user)/change-password'
+      path: '/change-password'
+      fullPath: '/change-password'
+      preLoaderRoute: typeof AuthenticateduserChangePasswordImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/(user)/diet': {
+      id: '/_authenticated/(user)/diet'
+      path: '/diet'
+      fullPath: '/diet'
+      preLoaderRoute: typeof AuthenticateduserDietImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/(user)/food-conversion': {
+      id: '/_authenticated/(user)/food-conversion'
       path: '/food-conversion'
       fullPath: '/food-conversion'
-      preLoaderRoute: typeof AuthenticatedFoodConversionImport
+      preLoaderRoute: typeof AuthenticateduserFoodConversionImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/overview': {
-      id: '/_authenticated/overview'
+    '/_authenticated/(user)/overview': {
+      id: '/_authenticated/(user)/overview'
       path: '/overview'
       fullPath: '/overview'
-      preLoaderRoute: typeof AuthenticatedOverviewImport
+      preLoaderRoute: typeof AuthenticateduserOverviewImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/profile': {
-      id: '/_authenticated/profile'
+    '/_authenticated/(user)/profile': {
+      id: '/_authenticated/(user)/profile'
       path: '/profile'
       fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedProfileImport
+      preLoaderRoute: typeof AuthenticateduserProfileImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_auth/login/': {
@@ -187,18 +197,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexImport
       parentRoute: typeof AuthImport
     }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
+    '/_authenticated/(system)/users/': {
+      id: '/_authenticated/(system)/users/'
       path: '/users'
       fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexImport
+      preLoaderRoute: typeof AuthenticatedsystemUsersIndexImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/users/$user/': {
-      id: '/_authenticated/users/$user/'
+    '/_authenticated/(system)/users/$user/workout': {
+      id: '/_authenticated/(system)/users/$user/workout'
+      path: '/users/$user/workout'
+      fullPath: '/users/$user/workout'
+      preLoaderRoute: typeof AuthenticatedsystemUsersUserWorkoutImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/(system)/users/$user/': {
+      id: '/_authenticated/(system)/users/$user/'
       path: '/users/$user'
       fullPath: '/users/$user'
-      preLoaderRoute: typeof AuthenticatedUsersUserIndexImport
+      preLoaderRoute: typeof AuthenticatedsystemUsersUserIndexImport
       parentRoute: typeof AuthenticatedImport
     }
   }
@@ -217,27 +234,31 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface AuthenticatedRouteChildren {
-  AuthenticatedChangePasswordRoute: typeof AuthenticatedChangePasswordRoute
-  AuthenticatedDietRoute: typeof AuthenticatedDietRoute
-  AuthenticatedExercisesRoute: typeof AuthenticatedExercisesRoute
-  AuthenticatedFoodRoute: typeof AuthenticatedFoodRoute
-  AuthenticatedFoodConversionRoute: typeof AuthenticatedFoodConversionRoute
-  AuthenticatedOverviewRoute: typeof AuthenticatedOverviewRoute
-  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
-  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
-  AuthenticatedUsersUserIndexRoute: typeof AuthenticatedUsersUserIndexRoute
+  AuthenticatedsystemExercisesRoute: typeof AuthenticatedsystemExercisesRoute
+  AuthenticatedsystemFoodRoute: typeof AuthenticatedsystemFoodRoute
+  AuthenticateduserChangePasswordRoute: typeof AuthenticateduserChangePasswordRoute
+  AuthenticateduserDietRoute: typeof AuthenticateduserDietRoute
+  AuthenticateduserFoodConversionRoute: typeof AuthenticateduserFoodConversionRoute
+  AuthenticateduserOverviewRoute: typeof AuthenticateduserOverviewRoute
+  AuthenticateduserProfileRoute: typeof AuthenticateduserProfileRoute
+  AuthenticatedsystemUsersIndexRoute: typeof AuthenticatedsystemUsersIndexRoute
+  AuthenticatedsystemUsersUserWorkoutRoute: typeof AuthenticatedsystemUsersUserWorkoutRoute
+  AuthenticatedsystemUsersUserIndexRoute: typeof AuthenticatedsystemUsersUserIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedChangePasswordRoute: AuthenticatedChangePasswordRoute,
-  AuthenticatedDietRoute: AuthenticatedDietRoute,
-  AuthenticatedExercisesRoute: AuthenticatedExercisesRoute,
-  AuthenticatedFoodRoute: AuthenticatedFoodRoute,
-  AuthenticatedFoodConversionRoute: AuthenticatedFoodConversionRoute,
-  AuthenticatedOverviewRoute: AuthenticatedOverviewRoute,
-  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
-  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
-  AuthenticatedUsersUserIndexRoute: AuthenticatedUsersUserIndexRoute,
+  AuthenticatedsystemExercisesRoute: AuthenticatedsystemExercisesRoute,
+  AuthenticatedsystemFoodRoute: AuthenticatedsystemFoodRoute,
+  AuthenticateduserChangePasswordRoute: AuthenticateduserChangePasswordRoute,
+  AuthenticateduserDietRoute: AuthenticateduserDietRoute,
+  AuthenticateduserFoodConversionRoute: AuthenticateduserFoodConversionRoute,
+  AuthenticateduserOverviewRoute: AuthenticateduserOverviewRoute,
+  AuthenticateduserProfileRoute: AuthenticateduserProfileRoute,
+  AuthenticatedsystemUsersIndexRoute: AuthenticatedsystemUsersIndexRoute,
+  AuthenticatedsystemUsersUserWorkoutRoute:
+    AuthenticatedsystemUsersUserWorkoutRoute,
+  AuthenticatedsystemUsersUserIndexRoute:
+    AuthenticatedsystemUsersUserIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -247,31 +268,33 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthenticatedRouteWithChildren
-  '/change-password': typeof AuthenticatedChangePasswordRoute
-  '/diet': typeof AuthenticatedDietRoute
-  '/exercises': typeof AuthenticatedExercisesRoute
-  '/food': typeof AuthenticatedFoodRoute
-  '/food-conversion': typeof AuthenticatedFoodConversionRoute
-  '/overview': typeof AuthenticatedOverviewRoute
-  '/profile': typeof AuthenticatedProfileRoute
+  '/exercises': typeof AuthenticatedsystemExercisesRoute
+  '/food': typeof AuthenticatedsystemFoodRoute
+  '/change-password': typeof AuthenticateduserChangePasswordRoute
+  '/diet': typeof AuthenticateduserDietRoute
+  '/food-conversion': typeof AuthenticateduserFoodConversionRoute
+  '/overview': typeof AuthenticateduserOverviewRoute
+  '/profile': typeof AuthenticateduserProfileRoute
   '/login': typeof AuthLoginIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/users/$user': typeof AuthenticatedUsersUserIndexRoute
+  '/users': typeof AuthenticatedsystemUsersIndexRoute
+  '/users/$user/workout': typeof AuthenticatedsystemUsersUserWorkoutRoute
+  '/users/$user': typeof AuthenticatedsystemUsersUserIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthenticatedRouteWithChildren
-  '/change-password': typeof AuthenticatedChangePasswordRoute
-  '/diet': typeof AuthenticatedDietRoute
-  '/exercises': typeof AuthenticatedExercisesRoute
-  '/food': typeof AuthenticatedFoodRoute
-  '/food-conversion': typeof AuthenticatedFoodConversionRoute
-  '/overview': typeof AuthenticatedOverviewRoute
-  '/profile': typeof AuthenticatedProfileRoute
+  '/exercises': typeof AuthenticatedsystemExercisesRoute
+  '/food': typeof AuthenticatedsystemFoodRoute
+  '/change-password': typeof AuthenticateduserChangePasswordRoute
+  '/diet': typeof AuthenticateduserDietRoute
+  '/food-conversion': typeof AuthenticateduserFoodConversionRoute
+  '/overview': typeof AuthenticateduserOverviewRoute
+  '/profile': typeof AuthenticateduserProfileRoute
   '/login': typeof AuthLoginIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/users/$user': typeof AuthenticatedUsersUserIndexRoute
+  '/users': typeof AuthenticatedsystemUsersIndexRoute
+  '/users/$user/workout': typeof AuthenticatedsystemUsersUserWorkoutRoute
+  '/users/$user': typeof AuthenticatedsystemUsersUserIndexRoute
 }
 
 export interface FileRoutesById {
@@ -279,16 +302,17 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
-  '/_authenticated/change-password': typeof AuthenticatedChangePasswordRoute
-  '/_authenticated/diet': typeof AuthenticatedDietRoute
-  '/_authenticated/exercises': typeof AuthenticatedExercisesRoute
-  '/_authenticated/food': typeof AuthenticatedFoodRoute
-  '/_authenticated/food-conversion': typeof AuthenticatedFoodConversionRoute
-  '/_authenticated/overview': typeof AuthenticatedOverviewRoute
-  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/(system)/exercises': typeof AuthenticatedsystemExercisesRoute
+  '/_authenticated/(system)/food': typeof AuthenticatedsystemFoodRoute
+  '/_authenticated/(user)/change-password': typeof AuthenticateduserChangePasswordRoute
+  '/_authenticated/(user)/diet': typeof AuthenticateduserDietRoute
+  '/_authenticated/(user)/food-conversion': typeof AuthenticateduserFoodConversionRoute
+  '/_authenticated/(user)/overview': typeof AuthenticateduserOverviewRoute
+  '/_authenticated/(user)/profile': typeof AuthenticateduserProfileRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
-  '/_authenticated/users/$user/': typeof AuthenticatedUsersUserIndexRoute
+  '/_authenticated/(system)/users/': typeof AuthenticatedsystemUsersIndexRoute
+  '/_authenticated/(system)/users/$user/workout': typeof AuthenticatedsystemUsersUserWorkoutRoute
+  '/_authenticated/(system)/users/$user/': typeof AuthenticatedsystemUsersUserIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -296,45 +320,48 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
-    | '/change-password'
-    | '/diet'
     | '/exercises'
     | '/food'
+    | '/change-password'
+    | '/diet'
     | '/food-conversion'
     | '/overview'
     | '/profile'
     | '/login'
     | '/users'
+    | '/users/$user/workout'
     | '/users/$user'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | ''
-    | '/change-password'
-    | '/diet'
     | '/exercises'
     | '/food'
+    | '/change-password'
+    | '/diet'
     | '/food-conversion'
     | '/overview'
     | '/profile'
     | '/login'
     | '/users'
+    | '/users/$user/workout'
     | '/users/$user'
   id:
     | '__root__'
     | '/'
     | '/_auth'
     | '/_authenticated'
-    | '/_authenticated/change-password'
-    | '/_authenticated/diet'
-    | '/_authenticated/exercises'
-    | '/_authenticated/food'
-    | '/_authenticated/food-conversion'
-    | '/_authenticated/overview'
-    | '/_authenticated/profile'
+    | '/_authenticated/(system)/exercises'
+    | '/_authenticated/(system)/food'
+    | '/_authenticated/(user)/change-password'
+    | '/_authenticated/(user)/diet'
+    | '/_authenticated/(user)/food-conversion'
+    | '/_authenticated/(user)/overview'
+    | '/_authenticated/(user)/profile'
     | '/_auth/login/'
-    | '/_authenticated/users/'
-    | '/_authenticated/users/$user/'
+    | '/_authenticated/(system)/users/'
+    | '/_authenticated/(system)/users/$user/workout'
+    | '/_authenticated/(system)/users/$user/'
   fileRoutesById: FileRoutesById
 }
 
@@ -377,55 +404,60 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
-        "/_authenticated/change-password",
-        "/_authenticated/diet",
-        "/_authenticated/exercises",
-        "/_authenticated/food",
-        "/_authenticated/food-conversion",
-        "/_authenticated/overview",
-        "/_authenticated/profile",
-        "/_authenticated/users/",
-        "/_authenticated/users/$user/"
+        "/_authenticated/(system)/exercises",
+        "/_authenticated/(system)/food",
+        "/_authenticated/(user)/change-password",
+        "/_authenticated/(user)/diet",
+        "/_authenticated/(user)/food-conversion",
+        "/_authenticated/(user)/overview",
+        "/_authenticated/(user)/profile",
+        "/_authenticated/(system)/users/",
+        "/_authenticated/(system)/users/$user/workout",
+        "/_authenticated/(system)/users/$user/"
       ]
     },
-    "/_authenticated/change-password": {
-      "filePath": "_authenticated/change-password.tsx",
+    "/_authenticated/(system)/exercises": {
+      "filePath": "_authenticated/(system)/exercises.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/diet": {
-      "filePath": "_authenticated/diet.tsx",
+    "/_authenticated/(system)/food": {
+      "filePath": "_authenticated/(system)/food.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/exercises": {
-      "filePath": "_authenticated/exercises.tsx",
+    "/_authenticated/(user)/change-password": {
+      "filePath": "_authenticated/(user)/change-password.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/food": {
-      "filePath": "_authenticated/food.tsx",
+    "/_authenticated/(user)/diet": {
+      "filePath": "_authenticated/(user)/diet.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/food-conversion": {
-      "filePath": "_authenticated/food-conversion.tsx",
+    "/_authenticated/(user)/food-conversion": {
+      "filePath": "_authenticated/(user)/food-conversion.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/overview": {
-      "filePath": "_authenticated/overview.tsx",
+    "/_authenticated/(user)/overview": {
+      "filePath": "_authenticated/(user)/overview.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/profile": {
-      "filePath": "_authenticated/profile.tsx",
+    "/_authenticated/(user)/profile": {
+      "filePath": "_authenticated/(user)/profile.tsx",
       "parent": "/_authenticated"
     },
     "/_auth/login/": {
       "filePath": "_auth/login/index.tsx",
       "parent": "/_auth"
     },
-    "/_authenticated/users/": {
-      "filePath": "_authenticated/users/index.tsx",
+    "/_authenticated/(system)/users/": {
+      "filePath": "_authenticated/(system)/users/index.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/users/$user/": {
-      "filePath": "_authenticated/users/$user/index.tsx",
+    "/_authenticated/(system)/users/$user/workout": {
+      "filePath": "_authenticated/(system)/users/$user/workout.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/(system)/users/$user/": {
+      "filePath": "_authenticated/(system)/users/$user/index.tsx",
       "parent": "/_authenticated"
     }
   }

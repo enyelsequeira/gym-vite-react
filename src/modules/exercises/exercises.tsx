@@ -4,7 +4,7 @@ import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-
 import useExerciseColumns from '@/modules/exercises/columns';
 import CreateNewExercise from '@/modules/exercises/components/create-new-exercise.tsx';
 import { useGetAllExercises } from '@/modules/exercises/queries/get-all-exercices.ts';
-import { Route as ExerciseRoute } from '@/routes/_authenticated/exercises';
+import { Route as ExerciseRoute } from '@/routes/_authenticated/(system)/exercises.tsx';
 import { Button, Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';

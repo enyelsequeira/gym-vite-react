@@ -1,20 +1,20 @@
-import CreateNewButton from '@/components/ui/buttons/create-button.tsx';
-import FormSection from '@/components/ui/forms/form-section.tsx';
-import { useChangePassword } from '@/server/change-password.tsx';
-import { useGetMe } from '@/server/get-me.ts';
-import { Alert, Container, Grid, Group, PasswordInput } from '@mantine/core';
-import { isNotEmpty, matchesField, useForm } from '@mantine/form';
-import { IconInfoCircle } from '@tabler/icons-react';
-import { createFileRoute } from '@tanstack/react-router';
+import CreateNewButton from '@/components/ui/buttons/create-button.tsx'
+import FormSection from '@/components/ui/forms/form-section.tsx'
+import { useChangePassword } from '@/server/change-password.tsx'
+import { useGetMe } from '@/server/get-me.ts'
+import { Alert, Container, Grid, Group, PasswordInput } from '@mantine/core'
+import { isNotEmpty, matchesField, useForm } from '@mantine/form'
+import { IconInfoCircle } from '@tabler/icons-react'
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_authenticated/change-password')({
+export const Route = createFileRoute('/_authenticated/(user)/change-password')({
   component: ChangePasswordPage,
-});
+})
 
 function ChangePasswordPage() {
-  const { data } = useGetMe();
-  const icon = <IconInfoCircle />;
-  const { mutate, isPending } = useChangePassword();
+  const { data } = useGetMe()
+  const icon = <IconInfoCircle />
+  const { mutate, isPending } = useChangePassword()
 
   const form = useForm({
     initialValues: {
@@ -28,9 +28,12 @@ function ChangePasswordPage() {
         value === values.currentPassword
           ? 'New Password cannot be the same as the current password'
           : isNotEmpty('New Password cannot be empty')(value),
-      confirmPassword: matchesField('newPassword', 'Passwords are not the same'),
+      confirmPassword: matchesField(
+        'newPassword',
+        'Passwords are not the same',
+      ),
     },
-  });
+  })
   return (
     <Container px={'xs'}>
       {data?.firstLogin ? (
@@ -43,9 +46,9 @@ function ChangePasswordPage() {
           fw={600}
           c={'yellow.8'}
         >
-          It seems like this is the first time logging in, before continuing please change your
-          temporary password that was given to you. This will make your account more secure and
-          accessible only to you
+          It seems like this is the first time logging in, before continuing
+          please change your temporary password that was given to you. This will
+          make your account more secure and accessible only to you
         </Alert>
       ) : null}
 
@@ -58,10 +61,10 @@ function ChangePasswordPage() {
               },
               {
                 onSuccess() {
-                  form.reset();
+                  form.reset()
                 },
-              }
-            );
+              },
+            )
           })}
         >
           <Grid mt="md">
@@ -102,5 +105,5 @@ function ChangePasswordPage() {
         </form>
       </FormSection>
     </Container>
-  );
+  )
 }

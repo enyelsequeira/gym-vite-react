@@ -1,4 +1,4 @@
-import type { NutritionData } from '@/routes/_authenticated/food-conversion.tsx';
+import type { NutritionData } from '@/routes/_authenticated/(user)/food-conversion.tsx';
 import type { GetAllFoods } from '@/server/foods.ts';
 
 export function calculateNutrition(food: GetAllFoods, qty: number): NutritionData {

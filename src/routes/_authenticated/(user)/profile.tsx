@@ -11,12 +11,14 @@ function ProfilePage() {
   );
 }
 
-export const Route = createFileRoute('/_authenticated/profile')({
+export const Route = createFileRoute('/_authenticated/(user)/profile')({
   component: ProfilePage,
 
   beforeLoad: async ({ context }) => {
     const data = await context.queryClient.fetchQuery({
-      ...getMeOptions({ id: context?.authentication?.session?.user?.id as number }),
+      ...getMeOptions({
+        id: context?.authentication?.session?.user?.id as number,
+      }),
     });
 
     if (data.firstLogin && data?.type === 'USER') {

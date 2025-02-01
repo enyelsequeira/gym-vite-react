@@ -8,7 +8,7 @@ import { Button, Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
-import { Route as FoodRoute } from '../../routes/_authenticated/food';
+import { Route as FoodRoute } from '../../routes/_authenticated/(system)/food.tsx';
 
 const FoodsView = () => {
   const route = FoodRoute.useSearch();

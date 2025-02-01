@@ -1,4 +1,4 @@
-import type { NutritionData } from '@/routes/_authenticated/food-conversion.tsx';
+import type { NutritionData } from '@/routes/_authenticated/(user)/food-conversion.tsx';
 import { Card, Flex, Text } from '@mantine/core';
 
 type NutritionDisplayProps = {

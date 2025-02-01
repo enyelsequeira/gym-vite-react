@@ -59,7 +59,7 @@ interface WeekWorkoutProps {
   onExerciseComplete?: (day: string, index: number) => void;
 }
 
-const WeekWorkout = ({ isUserView = true, onExerciseComplete }: WeekWorkoutProps) => {
+const WeekWorkout = ({ isUserView = false, onExerciseComplete }: WeekWorkoutProps) => {
   const { data: exerciseOptions } = useGetAllExercisesSelect({ limit: 400, page: 1 });
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
 

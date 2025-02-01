@@ -5,11 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7f8eb9c-ea74-474f-b6ba-824b854984f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/users/user/components/timer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/users/user/components/user-workout-view.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/_authenticated/(system)/users/$user/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/_authenticated/(system)/users/$user/workout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/exercises/exercises.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/exercises/exercises.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/food-conversion/components/nutrition-display.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food-conversion/components/nutrition-display.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/food-conversion/helpers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food-conversion/helpers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/foods/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/foods/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/profile/components/personal-settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/profile/components/personal-settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/columns/user-columns.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/columns/user-columns.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/user-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user-view.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/users/user/week-workout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/user/week-workout/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/workouts/components/workout-inputs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/workouts/components/workout-inputs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/workouts/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/workouts/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/workouts/context/work-out-context.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/workouts/context/work-out-context.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/users/workouts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/users/workouts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routeTree.gen.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routeTree.gen.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/change-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(user)/change-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/diet.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/exercises.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(system)/exercises.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/food-conversion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(user)/food-conversion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/food.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(system)/food.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/overview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(user)/overview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(user)/profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/users/$user/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/users/$user/workout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(user)/diet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/_authenticated/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/_authenticated/(system)/users/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,11 +80,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/routes/_authenticated/(system)" />
+      <recent name="$PROJECT_DIR$/src/routes/_authenticated/(user)" />
       <recent name="$PROJECT_DIR$/src/modules/layouts" />
       <recent name="$PROJECT_DIR$/src/modules/profile/layout" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/server/src" />
-      <recent name="$PROJECT_DIR$/drizzle" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -114,7 +135,8 @@
       <workItem from="1732202964887" duration="9434000" />
       <workItem from="1732402004082" duration="14000" />
       <workItem from="1733227610672" duration="12714000" />
-      <workItem from="1738164152233" duration="2356000" />
+      <workItem from="1738164152233" duration="8379000" />
+      <workItem from="1738428998846" duration="793000" />
     </task>
     <servers />
   </component>
@@ -151,7 +173,7 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/routes/_authenticated/change-password.tsx</url>
+          <url>file://$PROJECT_DIR$/src/routes/_authenticated/(user)/change-password.tsx</url>
           <line>76</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -161,9 +183,24 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/modules/users/user-view.tsx</url>
-          <line>67</line>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/src/modules/users/user/week-workout/index.tsx</url>
+          <line>52</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/users/workouts/components/workout-inputs.tsx</url>
+          <line>117</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/users/workouts/components/workout-inputs.tsx</url>
+          <line>122</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/modules/users/workouts/components/workout-inputs.tsx</url>
+          <line>126</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

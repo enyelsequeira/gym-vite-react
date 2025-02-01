@@ -4,7 +4,7 @@ import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-
 import useUserColumns from '@/modules/users/columns/user-columns.tsx';
 import CreateNewUserModal from '@/modules/users/components/create-new-user.tsx';
 import { useGetAllUsers } from '@/modules/users/queries/get-user.ts';
-import { Route as UserRoute } from '@/routes/_authenticated/users/index.tsx';
+import { Route as UserRoute } from '@/routes/_authenticated/(system)/users/index.tsx';
 import { Button, Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
