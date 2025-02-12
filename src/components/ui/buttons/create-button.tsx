@@ -4,18 +4,18 @@ import { forwardRef } from 'react';
 
 interface CustomButtonProps extends ButtonProps {
   isPending?: boolean;
+  withIcon?: boolean;
 }
 
-const CreateNewButton = createPolymorphicComponent<'button', CustomButtonProps>(
-  forwardRef<HTMLButtonElement, CustomButtonProps>(({ ...others }, ref) => (
+const GenericButton = createPolymorphicComponent<'button', CustomButtonProps>(
+  forwardRef<HTMLButtonElement, CustomButtonProps>(({ withIcon = false, ...others }, ref) => (
     <Button
-      variant="gradient"
       type="submit"
-      gradient={{ from: 'blue', to: 'cyan' }}
+      color={'blue.6'}
       radius="md"
-      px="xl"
+      px="sm"
       loading={others.isPending}
-      leftSection={<IconDeviceFloppy size={20} />}
+      leftSection={withIcon ? <IconDeviceFloppy size={20} /> : null}
       {...others}
       ref={ref}
     >
@@ -24,4 +24,4 @@ const CreateNewButton = createPolymorphicComponent<'button', CustomButtonProps>(
   ))
 );
 
-export default CreateNewButton;
+export default GenericButton;

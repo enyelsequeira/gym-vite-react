@@ -1,11 +1,12 @@
 import { useBaseTable } from '@/components/tables/use-base-table.tsx';
+import GenericButton from '@/components/ui/buttons/create-button.tsx';
 import { TableDrawer, TableWrapper } from '@/components/ui/table-wrapper';
 import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-filtering.ts';
 import useUserColumns from '@/modules/users/columns/user-columns.tsx';
 import CreateNewUserModal from '@/modules/users/components/create-new-user.tsx';
 import { useGetAllUsers } from '@/modules/users/queries/get-user.ts';
 import { Route as UserRoute } from '@/routes/_authenticated/(system)/users/index.tsx';
-import { Button, Container, Stack } from '@mantine/core';
+import { Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
@@ -40,15 +41,9 @@ const UserView = () => {
     },
     tableOptions: {
       renderTopToolbarCustomActions: () => (
-        <Button
-          variant="gradient"
-          gradient={{ from: 'blue', to: 'cyan' }}
-          radius="md"
-          leftSection={<IconPlus size={20} />}
-          onClick={open}
-        >
+        <GenericButton leftSection={<IconPlus />} onClick={open}>
           Create New
-        </Button>
+        </GenericButton>
       ),
       state: {
         globalFilter: search.username,

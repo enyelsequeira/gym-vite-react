@@ -5,7 +5,7 @@ import {
   useUserForm,
   validateUserForm,
 } from '@/components/context/user-creation-edit-context.tsx';
-import CreateNewButton from '@/components/ui/buttons/create-button.tsx';
+import GenericButton from '@/components/ui/buttons/create-button.tsx';
 import { DefaultDatePickerInput } from '@/components/ui/forms/default-date-picker-input.tsx';
 import { DefaultSelect } from '@/components/ui/forms/default-select.tsx';
 import FormSection from '@/components/ui/forms/form-section.tsx';
@@ -209,9 +209,9 @@ const CreateNewUserModal = ({ onSuccess }: CreateNewUserModalProps) => {
           </FormSection>
 
           <Group justify="flex-end" mt="xl">
-            <CreateNewButton type="submit" isPending={isPending}>
+            <GenericButton type="submit" isPending={isPending}>
               Create User
-            </CreateNewButton>
+            </GenericButton>
           </Group>
         </Stack>
       </form>

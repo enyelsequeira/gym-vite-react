@@ -1,10 +1,11 @@
 import { useBaseTable } from '@/components/tables/use-base-table';
+import GenericButton from '@/components/ui/buttons/create-button.tsx';
 import { TableDrawer, TableWrapper } from '@/components/ui/table-wrapper';
 import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-filtering.ts';
 import useFoodColumns from '@/modules/foods/columns/food';
 import CreateNewFood from '@/modules/foods/components/create-new-food';
 import { useGetAllFoods } from '@/server/foods';
-import { Button, Container, Stack } from '@mantine/core';
+import { Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
@@ -38,15 +39,9 @@ const FoodsView = () => {
     },
     tableOptions: {
       renderTopToolbarCustomActions: () => (
-        <Button
-          variant="gradient"
-          gradient={{ from: 'blue', to: 'cyan' }}
-          radius="md"
-          leftSection={<IconPlus size={20} />}
-          onClick={open}
-        >
+        <GenericButton leftSection={<IconPlus />} onClick={open}>
           Create New
-        </Button>
+        </GenericButton>
       ),
       state: {
         globalFilter: search.name,

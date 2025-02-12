@@ -1,8 +1,9 @@
+import GenericButton from '@/components/ui/buttons/create-button.tsx';
 import { DefaultSelect } from '@/components/ui/forms/default-select.tsx';
 import { useFormConversionContext } from '@/modules/food-conversion/context/form.tsx';
 import { getSelectedFood, prepareFoodSelectData } from '@/modules/food-conversion/helpers';
 import type { GetAllFoods } from '@/server/foods.ts';
-import { Button, type ComboboxItem, Grid, NumberInput } from '@mantine/core';
+import { type ComboboxItem, Grid, NumberInput } from '@mantine/core';
 import { useState } from 'react';
 
 type Props = {
@@ -69,15 +70,9 @@ export function FoodExchangeForm({ foods }: Props) {
         />
       </Grid.Col>
 
-      <Button
-        gradient={{ from: 'blue', to: 'cyan' }}
-        variant={'gradient'}
-        type="submit"
-        fullWidth
-        mt={'md'}
-      >
+      <GenericButton type="submit" fullWidth mt={'md'}>
         Calculate Exchange
-      </Button>
+      </GenericButton>
     </Grid>
   );
 }

@@ -1,11 +1,12 @@
 import { useBaseTable } from '@/components/tables/use-base-table.tsx';
+import GenericButton from '@/components/ui/buttons/create-button.tsx';
 import { TableDrawer, TableWrapper } from '@/components/ui/table-wrapper';
 import useHandlePageChangeAndFiltering from '@/hooks/use-handle-page-change-and-filtering.ts';
 import useExerciseColumns from '@/modules/exercises/columns';
 import CreateNewExercise from '@/modules/exercises/components/create-new-exercise.tsx';
 import { useGetAllExercises } from '@/modules/exercises/queries/get-all-exercices.ts';
 import { Route as ExerciseRoute } from '@/routes/_authenticated/(system)/exercises.tsx';
-import { Button, Container, Stack } from '@mantine/core';
+import { Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import { MantineReactTable } from 'mantine-react-table';
@@ -39,15 +40,9 @@ const ExercisesView = () => {
     },
     tableOptions: {
       renderTopToolbarCustomActions: () => (
-        <Button
-          variant="gradient"
-          gradient={{ from: 'blue', to: 'cyan' }}
-          radius="md"
-          leftSection={<IconPlus size={20} />}
-          onClick={open}
-        >
+        <GenericButton leftSection={<IconPlus />} onClick={open}>
           Create New
-        </Button>
+        </GenericButton>
       ),
       state: {
         globalFilter: search.name,

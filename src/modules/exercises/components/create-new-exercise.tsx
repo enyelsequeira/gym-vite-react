@@ -1,4 +1,4 @@
-import CreateButton from '@/components/ui/buttons/create-button.tsx';
+import GenericButton from '@/components/ui/buttons/create-button.tsx';
 import { DefaultSelect } from '@/components/ui/forms/default-select.tsx';
 import FormSection from '@/components/ui/forms/form-section.tsx';
 import { PersonalTextInput } from '@/components/ui/forms/text-input-default.tsx';
@@ -86,9 +86,9 @@ const CreateNewExercise = ({ onSuccess }: CreateNewExerciseProps) => {
             </Grid>
           </FormSection>
 
-          <CreateButton type="submit" variant="gradient" loading={isPending}>
+          <GenericButton type="submit" loading={isPending}>
             Save Exercise
-          </CreateButton>
+          </GenericButton>
         </Stack>
       </form>
     </Box>
